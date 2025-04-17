@@ -1,0 +1,2654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CinemaGhar Index</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style type="text/css">
+/* <![CDATA[ */
+:root {
+    --primary-color: #007bff;
+    --primary-hover: #0056b3;
+    --light-bg: #f8f9fa;
+    --container-bg: #ffffff;
+    --text-color: #343a40;
+    --text-muted: #6c757d;
+    --border-color: #dee2e6;
+    --header-bg: #ffffff;
+    --table-header-bg: #e9ecef;
+    --table-row-hover: #f1f3f5;
+    --error-color: #dc3545;
+    --success-color: #28a745;
+    --warning-bg: #fff3cd;
+    --warning-text: #856404;
+    --warning-border: #ffeeba;
+    --pagination-active-bg: #007bff;
+    --pagination-active-border: #007bff;
+    --pagination-hover-bg: #e9ecef;
+    --pagination-disabled-color: #adb5bd;
+    --pagination-disabled-bg: #ffffff;
+    --pagination-disabled-border: #dee2e6;
+    --filter-active-border: #adb5bd;
+
+    --border-radius-sm: 0.25rem;
+    --border-radius-md: 0.5rem;
+    --border-radius-lg: 0.8rem;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+    --shadow-md: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    /* Ensure html/body don't interfere with fullscreen */
+    width: 100%;
+    height: 100%;
+}
+
+body {
+     font-family: 'Poppins', Arial, sans-serif;
+     background-color: var(--light-bg);
+     color: var(--text-color);
+     line-height: 1.6;
+}
+#cinemaghar-container {
+    font-family: 'Poppins', Arial, sans-serif;
+    padding: 15px;
+    background-color: var(--container-bg);
+    border-radius: var(--border-radius-lg);
+    margin: 20px auto;
+    max-width: 1200px;
+    box-shadow: var(--shadow-md);
+    position: relative;
+    color: var(--text-color);
+    overflow: hidden; /* Helps contain floated/positioned elements */
+}
+
+#cinemaghar-container header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+    flex-wrap: wrap;
+    background-color: var(--header-bg);
+    padding: 15px;
+    border-radius: var(--border-radius-md) var(--border-radius-md) 0 0;
+    /* Adjust margins to align with container padding */
+    margin: -15px -15px 25px -15px;
+}
+#cinemaghar-container header img {
+    height: 60px;
+    border-radius: var(--border-radius-md);
+    flex-shrink: 0;
+    box-shadow: var(--shadow-sm);
+}
+#cinemaghar-container .header-title-signature {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    min-width: 0; /* Prevent overflow issues */
+}
+#cinemaghar-container .header-title-signature h1 {
+    font-size: 26px;
+    font-weight: 600;
+    margin: 0;
+    color: var(--text-color);
+    line-height: 1.2;
+    white-space: nowrap; /* Prevent wrapping */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Add ellipsis if title is too long */
+}
+#cinemaghar-container .header-title-signature .signature {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin: 4px 0 0 0;
+    font-style: italic;
+    font-weight: 300;
+    padding-left: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+#cinemaghar-container .header-buttons {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-shrink: 0;
+}
+#cinemaghar-container .header-buttons .button svg {
+    height: 1.1em;
+    width: 1.1em;
+    margin-right: 6px;
+    vertical-align: text-bottom;
+    fill: currentColor;
+}
+
+#cinemaghar-container h2 {
+    font-size: 22px;
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-top: 35px;
+    margin-bottom: 18px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--primary-color);
+}
+
+.filter-search-area {
+    display: flex;
+    gap: 10px; /* Reduced gap to bring search button closer */
+    margin: 10px 0 25px 0;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.search-group {
+    display: flex;
+    flex-grow: 1; /* Allow search input and button group to take space */
+    gap: 0; /* No gap between input and button */
+    min-width: 250px; /* Minimum width for the search group */
+}
+
+#cinemaghar-container #searchInput {
+    flex-grow: 1; /* Input takes available space within the group */
+    padding: 12px 15px;
+    border-radius: var(--border-radius-md) 0 0 var(--border-radius-md); /* Adjust radius for button */
+    border: 1px solid var(--border-color);
+    border-right: none; /* Remove right border as button is adjacent */
+    font-size: 16px;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    height: 44px; /* Match select height */
+    outline: none; /* Handled by focus style */
+}
+#cinemaghar-container #searchInput:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+    z-index: 1; /* Ensure focus outline is on top */
+    position: relative; /* Needed for z-index */
+}
+
+#cinemaghar-container #searchButton {
+    height: 44px;
+    padding: 0 18px; /* Adjust padding */
+    font-size: 14px;
+    font-weight: 500;
+    background-color: var(--primary-color);
+    color: white;
+    border: 1px solid var(--primary-color);
+    border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0; /* Match input corners */
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+    flex-shrink: 0; /* Prevent button from shrinking */
+    line-height: 1.4; /* Ensure text vertical alignment */
+    white-space: nowrap;
+}
+#cinemaghar-container #searchButton:hover {
+    background-color: var(--primary-hover);
+    border-color: var(--primary-hover);
+}
+#cinemaghar-container #searchButton:active {
+    background-color: #004a9e; /* Darker shade on click */
+    border-color: #004a9e;
+}
+
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0; /* Prevent filter group from shrinking excessively */
+}
+
+.filter-group label {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-muted);
+    white-space: nowrap;
+}
+
+#cinemaghar-container #qualityFilterSelect {
+    padding: 10px 12px;
+    border-radius: var(--border-radius-md);
+    border: 1px solid var(--border-color);
+    font-size: 14px;
+    background-color: white;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+    min-width: 150px;
+    height: 44px; /* Explicit height */
+    line-height: 1.5; /* Adjust line height if needed */
+    -webkit-appearance: none; /* Style consistency */
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%236c757d" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 16px 12px;
+    padding-right: 35px; /* Space for arrow */
+}
+#cinemaghar-container #qualityFilterSelect:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25); /* Focus style like input */
+}
+#cinemaghar-container #qualityFilterSelect.filter-active {
+    border-color: var(--filter-active-border);
+    background-color: #eef;
+    font-weight: 500;
+}
+
+#cinemaghar-container .table-container {
+    overflow-x: auto;
+    background: var(--container-bg);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-md);
+    margin-bottom: 10px;
+    border: 1px solid var(--border-color);
+}
+#cinemaghar-container table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 700px;
+}
+#cinemaghar-container th, #cinemaghar-container td {
+    padding: 13px 12px;
+    border: none;
+    border-bottom: 1px solid var(--border-color);
+    text-align: left;
+    font-size: 14px;
+    vertical-align: middle;
+    font-weight: 400;
+}
+#cinemaghar-container th.col-id, #cinemaghar-container td.col-id,
+#cinemaghar-container th.col-size, #cinemaghar-container td.col-size,
+#cinemaghar-container th.col-quality, #cinemaghar-container td.col-quality,
+#cinemaghar-container th.col-updated, #cinemaghar-container td.col-updated,
+#cinemaghar-container th.col-view, #cinemaghar-container td.col-view {
+    text-align: center;
+    white-space: nowrap;
+}
+
+#cinemaghar-container th {
+    background-color: var(--table-header-bg);
+    font-weight: 600;
+    color: var(--text-color);
+    white-space: nowrap;
+    position: sticky; /* Make header sticky for better scrolling */
+    top: 0;          /* Stick to the top */
+    z-index: 2;      /* Ensure header is above table content */
+    cursor: pointer;
+    user-select: none;
+}
+#cinemaghar-container th.sortable:hover {
+    background-color: #dde2e6;
+}
+#cinemaghar-container th .sort-indicator {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    margin-left: 6px;
+    vertical-align: middle;
+    opacity: 0.5;
+    transition: opacity 0.2s ease, border-color 0.2s;
+}
+#cinemaghar-container th.sort-asc .sort-indicator {
+    border-bottom: 5px solid var(--primary-color);
+    opacity: 1;
+}
+#cinemaghar-container th.sort-desc .sort-indicator {
+    border-top: 5px solid var(--primary-color);
+    opacity: 1;
+}
+#cinemaghar-container th:not(.sortable) .sort-indicator { display: none; }
+#cinemaghar-container th:not(.sortable) { cursor: default; }
+/* Column widths */
+#cinemaghar-container th.col-id, #cinemaghar-container td.col-id { width: 6%; }
+#cinemaghar-container th.col-filename, #cinemaghar-container td.col-filename { width: 45%; }
+#cinemaghar-container th.col-size, #cinemaghar-container td.col-size { width: 12%; }
+#cinemaghar-container th.col-quality, #cinemaghar-container td.col-quality { width: 12%; }
+#cinemaghar-container th.col-updated, #cinemaghar-container td.col-updated { width: 15%; }
+#cinemaghar-container th.col-view, #cinemaghar-container td.col-view { width: 10%; }
+
+#cinemaghar-container tr:last-child td {
+    border-bottom: none;
+}
+#cinemaghar-container tbody tr:not(.action-row):hover {
+    background-color: var(--table-row-hover);
+    cursor: default; /* Default cursor for row */
+}
+
+#cinemaghar-container td.col-filename {
+    word-break: break-all; /* Keep allowing break */
+    text-align: left;
+    min-width: 150px; /* Keep min-width */
+    cursor: pointer; /* Cursor indicates clickability */
+    color: var(--primary-color);
+    font-weight: 500;
+    transition: color 0.2s ease;
+    white-space: normal; /* Ensure long names can wrap if needed */
+    position: relative; /* For positioning logos if needed */
+}
+#cinemaghar-container td.col-filename:hover {
+    color: var(--primary-hover);
+    text-decoration: underline;
+}
+
+#cinemaghar-container td.col-filename .quality-logo {
+    height: 1.1em;
+    width: auto;
+    vertical-align: text-bottom; /* Try text-bottom for better alignment */
+    margin-left: 5px;
+    display: inline-block;
+    line-height: 1;
+    filter: grayscale(30%);
+    opacity: 0.8;
+    transition: filter 0.2s ease, opacity 0.2s ease;
+}
+#cinemaghar-container td.col-filename:hover .quality-logo {
+    filter: grayscale(0%);
+    opacity: 1;
+}
+
+#cinemaghar-container td.col-quality {
+    text-align: center;
+    min-width: 80px;
+    white-space: nowrap;
+    font-weight: 500;
+}
+#cinemaghar-container td.col-updated {
+    white-space: nowrap;
+    min-width: 130px;
+    color: var(--text-muted);
+    font-size: 13px;
+}
+#cinemaghar-container td.status-message,
+#cinemaghar-container td.error-message {
+    color: var(--text-muted);
+    font-style: italic;
+    text-align: center;
+    padding: 20px;
+    font-size: 15px;
+}
+#cinemaghar-container td.error-message {
+    color: var(--error-color);
+    font-weight: 500;
+}
+
+/* Action Row */
+#cinemaghar-container tr.action-row {
+    display: none; /* Keep hidden by default */
+    background-color: #f0f2f5;
+}
+#cinemaghar-container .action-row td {
+    padding: 20px 15px;
+    text-align: left;
+    border-bottom: none;
+    box-shadow: inset 0 3px 5px rgba(0,0,0,0.04);
+}
+#cinemaghar-container .action-info {
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: var(--text-muted);
+    text-align: left;
+    line-height: 1.7;
+}
+#cinemaghar-container .action-info .info-item {
+    display: block; /* Display items as blocks for clarity */
+    margin-bottom: 8px;
+}
+#cinemaghar-container .action-info strong {
+    color: var(--text-color);
+    font-weight: 600;
+    margin-right: 8px;
+    display: inline-block;
+    min-width: 80px;
+}
+#cinemaghar-container .action-info .quality-logo {
+    height: 1.1em;
+    width: auto;
+    vertical-align: text-bottom; /* Consistent alignment */
+    margin-left: 4px;
+    display: inline-block;
+}
+
+#cinemaghar-container .action-buttons-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start; /* Align buttons to the start */
+    gap: 10px;
+    margin-bottom: 15px;
+    border-top: 1px solid var(--border-color);
+    padding-top: 20px;
+}
+
+/* Buttons */
+#cinemaghar-container .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 9px 16px;
+    margin: 2px 0; /* Small vertical margin */
+    background-color: var(--success-color); /* Default */
+    color: white !important;
+    border: none;
+    border-radius: var(--border-radius-md);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    text-align: center;
+    white-space: nowrap;
+    line-height: 1.4;
+    transition: all 0.2s ease-in-out;
+    box-shadow: var(--shadow-sm);
+}
+#cinemaghar-container .button:hover {
+    opacity: 1;
+    filter: brightness(1.1);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    transform: translateY(-1px);
+}
+#cinemaghar-container .button:active {
+    filter: brightness(0.95);
+    transform: translateY(0);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Specific Button Colors */
+#cinemaghar-container .view-button { background-color: #6c757d; }
+#cinemaghar-container .view-button:hover { background-color: #5a6268; }
+#cinemaghar-container .play-button { background-color: var(--success-color); }
+#cinemaghar-container .intent-button { background-color: #17a2b8; } /* Color for the Android button */
+#cinemaghar-container .vlc-button { background-color: #fd7e14; }
+#cinemaghar-container .download-button { background-color: var(--primary-color); }
+#cinemaghar-container .telegram-button { background-color: #0088cc; }
+#cinemaghar-container .gdflix-button { background-color: #E50914; }
+#cinemaghar-container .hubcloud-button { background-color: #1E90FF; }
+#cinemaghar-container .filepress-button { background-color: #6c757d; }
+#cinemaghar-container .gdtot-button { background-color: #ffc107; color: #333 !important; }
+
+/* Copy Feedback */
+#cinemaghar-container .copy-feedback {
+    display: inline-block;
+    margin-left: 10px; /* More space */
+    font-size: 13px; /* Slightly larger */
+    color: var(--success-color);
+    font-weight: 600;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    vertical-align: middle; /* Align with button text */
+}
+#cinemaghar-container .copy-feedback.show {
+    opacity: 1;
+}
+
+/* Video Player Container */
+#cinemaghar-container .video-container {
+    display: none; /* Hidden by default */
+    margin: 20px auto 0 auto;
+    background: #f1f3f5;
+    padding: 50px 20px 20px 20px; /* More top padding for close button */
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    position: relative; /* For close button positioning */
+    box-sizing: border-box;
+    width: 100%; /* Take full width of parent cell */
+    max-width: 850px; /* Limit max width for large screens */
+    text-align: center;
+    /* Base styles for flex layout */
+    display: flex;
+    flex-direction: column;
+}
+#cinemaghar-container .close-btn {
+    position: absolute;
+    top: 15px;
+    right: 18px;
+    background: var(--error-color);
+    color: white !important;
+    border: none;
+    padding: 6px 12px;
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    z-index: 10; /* Above other content */
+    transition: background-color 0.2s ease;
+}
+#cinemaghar-container .close-btn:hover {
+    background-color: #c82333;
+}
+#cinemaghar-container #audioWarning {
+    display: none; /* Hidden by default */
+    background-color: var(--warning-bg);
+    color: var(--warning-text);
+    border: 1px solid var(--warning-border);
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: var(--border-radius-md);
+    font-size: 14px;
+    text-align: center;
+    position: relative; /* Ensure it's part of flow */
+    z-index: 1;
+    line-height: 1.5;
+    flex-shrink: 0; /* Don't shrink warning message */
+}
+#cinemaghar-container #audioWarning strong { font-weight: 600; }
+#cinemaghar-container #html5VideoPlayer {
+    width: 100%;
+    max-height: 480px; /* Control max height IN NORMAL MODE */
+    display: block;
+    margin: 10px auto 15px auto;
+    background: black; /* Background for letterboxing */
+    border-radius: var(--border-radius-md);
+    outline: none; /* Remove default outline */
+    box-shadow: var(--shadow-md);
+    flex-shrink: 1; /* Allow video to shrink if needed */
+    flex-grow: 1;   /* Allow video to grow within flex container */
+    object-fit: contain; /* Maintain aspect ratio */
+    cursor: default; /* Standard cursor for video */
+}
+#cinemaghar-container .custom-controls {
+    margin-top: 10px;
+    display: flex; /* Make controls visible by default when not fullscreen */
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap; /* Allow controls to wrap on smaller screens */
+    flex-shrink: 0; /* Prevent controls shrinking */
+    position: relative;
+}
+/* Style custom control buttons */
+#cinemaghar-container .custom-controls .button {
+    background-color: #5a6268;
+    min-width: 60px;
+    font-size: 12px;
+    padding: 6px 10px;
+    color: white !important; /* Ensure text color */
+}
+#cinemaghar-container .custom-controls .button:hover {
+    background-color: #495057;
+}
+#cinemaghar-container #audioTrackSelect {
+    padding: 6px 10px;
+    border-radius: var(--border-radius-md);
+    background-color: #e9ecef;
+    border: 1px solid var(--border-color);
+    font-size: 13px;
+    font-family: inherit;
+    cursor: pointer;
+    max-width: 150px;
+    display: none; /* Hidden until needed */
+    transition: border-color 0.2s ease;
+    height: 30px; /* Consistent height */
+    line-height: 1; /* Ensure text fits */
+    vertical-align: middle; /* Align with buttons */
+    -webkit-appearance: none; /* Basic styling */
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%236c757d" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 5px center;
+    background-size: 12px 10px;
+    padding-right: 25px; /* Space for arrow */
+}
+#cinemaghar-container #audioTrackSelect:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+#cinemaghar-container #videoTitle {
+    font-weight: 600;
+    margin-bottom: 15px;
+    font-size: 18px;
+    color: var(--text-color);
+    position: relative; /* Part of flow */
+    z-index: 1;
+    padding-top: 0; /* Reset padding */
+    text-align: left; /* Align title left */
+    word-break: break-word; /* Allow title to wrap */
+    flex-shrink: 0; /* Don't shrink title */
+}
+#cinemaghar-container .vlc-copy-box {
+    margin-top: 20px;
+    background: #e9ecef;
+    padding: 12px 15px;
+    border-radius: var(--border-radius-md);
+    font-size: 14px;
+    word-wrap: break-word;
+    line-height: 1.6;
+    color: var(--text-muted);
+    text-align: left;
+    border: 1px solid var(--border-color);
+    flex-shrink: 0; /* Don't shrink copy box */
+}
+#cinemaghar-container .vlc-copy-box strong {
+    color: var(--text-color);
+    font-weight: 600;
+    display: block;
+    margin-bottom: 5px;
+}
+#cinemaghar-container .vlc-copy-box code {
+    background: #dcdcdc;
+    padding: 3px 6px;
+    border-radius: var(--border-radius-sm);
+    font-family: 'Courier New', Courier, monospace;
+    word-break: break-all;
+    color: #333;
+    font-size: 13px;
+    display: block;
+    margin-top: 3px;
+    user-select: all; /* Make code selectable */
+}
+
+/* Player Controls Grouping */
+.player-control-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.player-control-group label {
+    font-size: 12px;
+    color: var(--text-muted);
+    white-space: nowrap;
+}
+#volumeSlider {
+    width: 80px;
+    cursor: pointer;
+    height: 5px;
+    transition: opacity 0.2s ease;
+    vertical-align: middle;
+    accent-color: var(--primary-color); /* Modern way to color range slider */
+}
+#playbackSpeedSelect {
+    padding: 4px 8px;
+    font-size: 12px;
+    border-radius: var(--border-radius-sm);
+    border: 1px solid var(--border-color);
+    background-color: #fff;
+    height: 30px;
+    line-height: 1;
+    vertical-align: middle;
+    -webkit-appearance: none; /* Basic styling */
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%236c757d" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 5px center;
+    background-size: 12px 10px;
+    padding-right: 25px; /* Space for arrow */
+}
+
+/* --- Fullscreen Specific Styles --- */
+#cinemaghar-container .video-container.is-fullscreen {
+    /* Override normal styles when fullscreen */
+    position: fixed; /* Take over the screen */
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    max-width: none; /* Remove max-width constraint */
+    padding: 0; /* Remove padding */
+    margin: 0;
+    border-radius: 0; /* Remove border-radius */
+    background-color: black; /* Ensure black background */
+    z-index: 2147483647; /* Highest possible z-index */
+    display: flex; /* Use flex to arrange children */
+    flex-direction: column;
+    justify-content: center; /* Center content vertically */
+    /* No cursor hiding needed here as controls are hidden */
+}
+
+#cinemaghar-container .video-container.is-fullscreen #html5VideoPlayer {
+    /* Ensure video expands */
+    width: 100%;
+    height: 100%; /* Allow video to take full height */
+    max-height: none; /* Remove max-height */
+    flex-grow: 1; /* Take available space */
+    flex-shrink: 1;
+    border-radius: 0;
+    box-shadow: none;
+    margin: 0;
+    object-fit: contain; /* Keep aspect ratio, fit within container */
+    cursor: default; /* Use default cursor */
+}
+
+/* --- HIDE CONTROLS IN FULLSCREEN --- */
+#cinemaghar-container .video-container.is-fullscreen .custom-controls {
+    display: none !important; /* Hide custom controls container */
+}
+#cinemaghar-container .video-container.is-fullscreen .close-btn {
+    display: none !important; /* Hide close button */
+}
+
+#cinemaghar-container .video-container.is-fullscreen #videoTitle,
+#cinemaghar-container .video-container.is-fullscreen #audioWarning,
+#cinemaghar-container .video-container.is-fullscreen .vlc-copy-box {
+    /* Hide non-essential elements in fullscreen (already done) */
+    display: none !important;
+}
+/* --- End Fullscreen Specific Styles --- */
+
+/* Pagination */
+.pagination-container {
+    text-align: center;
+    margin: 25px 0 10px 0;
+    user-select: none; /* Prevent text selection */
+}
+.pagination-container button,
+.pagination-container span {
+    display: inline-block;
+    padding: 8px 14px;
+    margin: 0 3px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    background-color: white;
+    color: var(--primary-color);
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    vertical-align: middle; /* Align elements */
+}
+.pagination-container button:hover:not(:disabled) {
+    background-color: var(--pagination-hover-bg);
+    border-color: #adb5bd;
+}
+.pagination-container span.current-page {
+    background-color: var(--pagination-active-bg);
+    border-color: var(--pagination-active-border);
+    color: white;
+    font-weight: 600;
+    cursor: default;
+}
+.pagination-container button:disabled {
+    color: var(--pagination-disabled-color);
+    background-color: var(--pagination-disabled-bg);
+    border-color: var(--pagination-disabled-border);
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+.pagination-container .page-info { /* Ellipsis */
+    font-size: 13px;
+    color: var(--text-muted);
+    margin: 0 5px; /* Adjust spacing */
+    padding: 8px 0;
+    border: none;
+    background: none;
+    cursor: default;
+    display: inline-block; /* Ensure it aligns */
+    vertical-align: middle;
+}
+
+/* Spinner */
+.spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border-left-color: var(--primary-color);
+    margin: 30px auto;
+    animation: spin 1s ease infinite;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+  body { font-size: 14px; }
+  #cinemaghar-container { padding: 10px; margin: 10px; }
+
+  #cinemaghar-container header {
+      padding: 12px 10px;
+      margin: -10px -10px 20px -10px;
+      gap: 10px;
+      flex-direction: column;
+      align-items: flex-start;
+  }
+  #cinemaghar-container header img { height: 45px; }
+  #cinemaghar-container .header-title-signature h1 { font-size: 20px; }
+  #cinemaghar-container .header-title-signature .signature { font-size: 12px; }
+  #cinemaghar-container .header-buttons {
+      gap: 8px;
+      width: 100%;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+  }
+  #cinemaghar-container .header-buttons .button {
+      font-size: 12px;
+      padding: 8px 12px;
+   }
+  #cinemaghar-container .header-buttons .button svg { height: 1em; width: 1em; margin-right: 5px;}
+
+  .filter-search-area {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 12px;
+  }
+  .search-group {
+      min-width: unset; /* Remove min-width on mobile */
+  }
+  #cinemaghar-container #searchInput {
+      min-width: unset;
+      width: 100%; /* Takes available space */
+      font-size: 15px;
+      padding: 11px 13px;
+      height: 40px; /* Adjust height */
+      border-radius: var(--border-radius-md) 0 0 var(--border-radius-md); /* Adjust radius for button */
+  }
+   #cinemaghar-container #searchButton {
+      height: 40px; /* Match input height */
+      padding: 0 15px;
+      font-size: 13px;
+      border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0; /* Adjust radius */
+   }
+
+  .filter-group {
+      justify-content: space-between;
+      gap: 10px;
+  }
+  .filter-group label { font-size: 13px; margin-right: 5px;}
+  #cinemaghar-container #qualityFilterSelect {
+      font-size: 14px;
+      padding: 9px 10px;
+      min-width: unset;
+      flex-grow: 1;
+      width: auto;
+      height: 40px; /* Adjust height */
+      padding-right: 30px; /* Adjust padding for arrow */
+      background-position: right 8px center;
+  }
+
+  #cinemaghar-container .table-container {
+      border: none;
+      box-shadow: none;
+      border-radius: 0;
+      margin-left: -10px;
+      margin-right: -10px;
+      overflow-x: visible; /* Let table handle scroll */
+   }
+   #cinemaghar-container table {
+        min-width: unset; /* Allow table to shrink */
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius-md);
+        box-shadow: var(--shadow-sm);
+        display: block; /* Force block display for overflow */
+        overflow-x: auto; /* Enable horizontal scroll ONLY on table */
+        white-space: nowrap; /* Prevent wrapping within table itself */
+        -webkit-overflow-scrolling: touch; /* Smoother scrolling on iOS */
+   }
+   #cinemaghar-container thead, #cinemaghar-container tbody, #cinemaghar-container tr {
+        display: table; /* Make children behave like table elements */
+        width: 100%;    /* Ensure they take full width */
+        table-layout: fixed; /* Use fixed layout for consistency */
+   }
+   #cinemaghar-container thead {
+        position: sticky; /* Sticky header on mobile too */
+        top: 0;
+        z-index: 3; /* Higher z-index */
+   }
+
+  #cinemaghar-container th, #cinemaghar-container td {
+      padding: 10px 8px;
+      font-size: 13px;
+      border-bottom: 1px solid var(--border-color);
+      display: table-cell; /* Ensure cell behavior */
+      white-space: normal; /* Allow content wrapping within cell */
+      vertical-align: middle; /* Align content vertically */
+      /* Widths need careful management with fixed layout */
+  }
+
+  /* Hide columns on mobile */
+  #cinemaghar-container thead tr th.col-size,
+  #cinemaghar-container thead tr th.col-updated,
+  #cinemaghar-container tbody tr:not(.action-row) td.col-size,
+  #cinemaghar-container tbody tr:not(.action-row) td.col-updated {
+       display: none; /* Hide columns */
+  }
+
+   /* Adjust visible column widths */
+   #cinemaghar-container th.col-id, #cinemaghar-container td.col-id { width: 12%; text-align: center; }
+   #cinemaghar-container th.col-filename, #cinemaghar-container td.col-filename { width: 48%; font-weight: 500; }
+   #cinemaghar-container th.col-quality, #cinemaghar-container td.col-quality { width: 20%; text-align: center; font-weight: 500;}
+   #cinemaghar-container th.col-view, #cinemaghar-container td.col-view { width: 20%; text-align: center; }
+
+  #cinemaghar-container th .sort-indicator { margin-left: 4px; border-width: 4px; }
+  #cinemaghar-container th.sort-asc .sort-indicator { border-bottom-width: 4px; }
+  #cinemaghar-container th.sort-desc .sort-indicator { border-top-width: 4px; }
+
+  #cinemaghar-container td.col-filename {
+      word-break: break-word; /* Ensure filename breaks */
+      white-space: normal; /* Allow wrapping */
+      cursor: pointer;
+  }
+  #cinemaghar-container td.col-filename .quality-logo {
+       height: 0.9em;
+       margin-left: 3px;
+       vertical-align: baseline;
+  }
+  #cinemaghar-container td.col-quality { min-width: unset; }
+
+   #cinemaghar-container td.col-view .button.view-button {
+      font-size: 12px;
+      padding: 6px 8px; /* Slightly smaller padding */
+      width: 100%;
+      min-width: 45px; /* Smaller min-width */
+      box-sizing: border-box; /* Include padding in width */
+   }
+
+   /* Correct colspan for action row on mobile (visible columns: 4) */
+   /* Updated: When TD is block, colspan is irrelevant */
+   #cinemaghar-container .action-row td {
+        padding: 15px 10px;
+        display: block; /* Make action row cell block */
+        width: auto; /* Auto width */
+        white-space: normal; /* Allow wrapping */
+        /* colspan attribute is ignored when display is block */
+   }
+
+  #cinemaghar-container .action-info {
+      font-size: 13px;
+      margin-bottom: 15px;
+  }
+   #cinemaghar-container .action-info .info-item {
+        display: block;
+        margin-bottom: 6px;
+        line-height: 1.5;
+   }
+   #cinemaghar-container .action-info strong {
+        display: inline-block;
+        min-width: 65px;
+        font-weight: 600;
+        margin-right: 5px;
+   }
+   #cinemaghar-container .action-info .quality-logo {
+        height: 0.9em;
+        vertical-align: baseline;
+   }
+
+  #cinemaghar-container .action-buttons-container {
+      flex-direction: column; /* Stack buttons vertically */
+      align-items: stretch; /* Make buttons full width */
+      gap: 8px;
+      padding-top: 15px;
+  }
+  #cinemaghar-container .action-buttons-container .button {
+      font-size: 13px;
+      padding: 10px 15px;
+      width: 100%; /* Full width */
+      max-width: none;
+      margin: 0;
+      box-sizing: border-box;
+  }
+
+  #cinemaghar-container #html5VideoPlayer { max-height: 280px; } /* Normal max height on mobile */
+  #cinemaghar-container .video-container {
+      padding: 45px 10px 15px 10px;
+      max-width: 100%;
+      margin-left: 0; /* Align within the cell */
+      margin-right: 0;
+      border-radius: var(--border-radius-md); /* Keep some radius */
+  }
+  #cinemaghar-container .video-container.is-fullscreen #html5VideoPlayer {
+      /* Override max-height in fullscreen on mobile too */
+      max-height: none;
+  }
+  #cinemaghar-container .close-btn { top: 12px; right: 12px; padding: 5px 9px; font-size: 12px; }
+  #cinemaghar-container #videoTitle { font-size: 16px; }
+  #cinemaghar-container #audioWarning { font-size: 12px; padding: 10px; line-height: 1.4; }
+  #cinemaghar-container .custom-controls { gap: 8px; }
+  #cinemaghar-container .custom-controls .button { padding: 7px 10px; font-size: 11px; min-width: 55px;}
+  #cinemaghar-container #audioTrackSelect { font-size: 12px; padding: 5px 8px; max-width: 120px; height: 34px; }
+  #cinemaghar-container .vlc-copy-box { font-size: 12px; padding: 10px; }
+  #cinemaghar-container .vlc-copy-box code { font-size: 11px; }
+  .player-control-group label { font-size: 11px;}
+  #volumeSlider { width: 60px;}
+  #playbackSpeedSelect { font-size: 12px; padding: 3px 6px; height: 34px; }
+
+    .pagination-container { margin: 20px 0 5px 0; }
+    .pagination-container button,
+    .pagination-container span { padding: 7px 11px; font-size: 13px; margin: 0 2px;}
+    .pagination-container .page-info { font-size: 12px; margin: 0 5px; padding: 7px 0;}
+}
+/* ]]> */
+</style>
+</head>
+<body>
+
+<div id="cinemaghar-container">
+
+  <header>
+    <img src="https://i.ibb.co/s1Kn4MT/c68903b0d838.jpg" alt="CinemaGhar Logo" />
+    <div class="header-title-signature">
+        <h1>CinemaGhar Index</h1>
+        <p class="signature">Curated with ❣️ by The_SabhyaPlayer</p>
+    </div>
+    <div class="header-buttons">
+        <a href="https://t.me/The_Sabhyaplayer_bot" target="_blank" rel="noopener noreferrer" class="button telegram-button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" aria-hidden="true" focusable="false" style="width:1.1em; height:1.1em; fill:currentColor; margin-right:6px; vertical-align:text-bottom;">
+                <path d="M97.9,161.4l-2.8,29.9c3.4,0,4.9-1.7,6.8-3.6l14.1-13.6l29.4,21.7c5.4,3.1,9.3,1.5,10.8-4.9l19.9-93.5c1.8-7.8-2.4-11.5-7.5-9.3L36.4,127.1c-7.6,3-7.6,7.5-1.3,9.6l30.2,9.4l70.4-44.3c3.3-2,6.1-0.9,3.6,1.4L97.9,161.4z"/>
+            </svg>
+            <span>Contact The_SabhyaPlayer</span>
+        </a>
+        <a href="https://t.me/Cinemaghar_Lobby" target="_blank" rel="noopener noreferrer" class="button telegram-button">
+             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" aria-hidden="true" focusable="false" style="width:1.1em; height:1.1em; fill:currentColor; margin-right:6px; vertical-align:text-bottom;">
+                 <path d="M97.9,161.4l-2.8,29.9c3.4,0,4.9-1.7,6.8-3.6l14.1-13.6l29.4,21.7c5.4,3.1,9.3,1.5,10.8-4.9l19.9-93.5c1.8-7.8-2.4-11.5-7.5-9.3L36.4,127.1c-7.6,3-7.6,7.5-1.3,9.6l30.2,9.4l70.4-44.3c3.3-2,6.1-0.9,3.6,1.4L97.9,161.4z"/>
+             </svg>
+            <span>Join Channel</span>
+        </a>
+    </div>
+  </header>
+
+  <div class="filter-search-area">
+      <div class="search-group">
+          <input type="search" id="searchInput" placeholder="Search movies by name or ID..." />
+          <button id="searchButton">Search</button>
+      </div>
+      <div class="filter-group">
+          <label for="qualityFilterSelect">Quality:</label>
+          <select id="qualityFilterSelect">
+              <option value="">All Qualities</option>
+              <!-- Options populated by JS -->
+          </select>
+      </div>
+  </div>
+
+  <div id="updatesSection">
+    <h2>Updates (Last 24 Hours)</h2>
+    <div class="table-container">
+      <table id="updatesTable">
+        <thead>
+            <tr>
+                <th class="col-id">#</th>
+                <th class="col-filename">Filename</th>
+                <th class="col-size">Size</th>
+                <th class="col-quality">Quality</th>
+                <th class="col-updated">Updated</th>
+                <th class="col-view">View</th>
+             </tr>
+         </thead>
+        <tbody id="updatesTableBody">
+            <!-- Content generated by JS -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h2>Recently Listed</h2>
+  <div class="table-container">
+    <table id="movieTable">
+      <thead>
+          <tr>
+              <th class="sortable col-id" data-sort-key="id">#<span class="sort-indicator"></span></th>
+              <th class="sortable col-filename" data-sort-key="filename">Filename<span class="sort-indicator"></span></th>
+              <th class="sortable col-size" data-sort-key="size">Size<span class="sort-indicator"></span></th>
+              <th class="sortable col-quality" data-sort-key="quality">Quality<span class="sort-indicator"></span></th>
+              <th class="sortable col-updated" data-sort-key="lastUpdated">Updated<span class="sort-indicator"></span></th>
+              <th class="col-view">View</th>
+          </tr>
+      </thead>
+      <tbody id="movieTableBody">
+         <!-- Content generated by JS -->
+      </tbody>
+    </table>
+  </div>
+
+  <div class="pagination-container" id="paginationControls" style="display: none;">
+      <!-- Content generated by JS -->
+  </div>
+
+  <!-- Video Player Container - Moved here from within action row for structural sanity -->
+  <!-- It will be appended to the correct action row cell dynamically -->
+  <div class="video-container" id="videoContainer">
+      <button class="close-btn" onclick="closePlayer()">✖ Close</button>
+      <div id="audioWarning" style="display: none;"></div>
+      <div id="videoTitle"></div>
+      <video id="html5VideoPlayer" controls autoplay controlsList="nodownload noremoteplayback">
+          Your browser does not support the video tag.
+      </video>
+      <div class="custom-controls" id="customControlsContainer">
+          <button class="button" onclick="seekVideo(-10)">« 10s</button>
+          <button class="button" onclick="seekVideo(10)">10s »</button>
+          <button class="button" id="muteButton" onclick="toggleMute()">Mute</button>
+
+          <div class="player-control-group">
+            <label for="volumeSlider">Vol:</label>
+            <input type="range" id="volumeSlider" min="0" max="1" step="0.05" value="1" oninput="setVolume(this.value)" onchange="setVolume(this.value)">
+          </div>
+
+          <select id="audioTrackSelect" onchange="changeAudioTrack(this)" title="Select Audio Track"></select>
+
+          <div class="player-control-group">
+             <label for="playbackSpeedSelect">Speed:</label>
+             <select id="playbackSpeedSelect" onchange="setPlaybackSpeed(this.value)">
+                <option value="0.5">0.5x</option>
+                <option value="0.75">0.75x</option>
+                <option value="1" selected>1x</option>
+                <option value="1.25">1.25x</option>
+                <option value="1.5">1.5x</option>
+                <option value="2">2x</option>
+             </select>
+          </div>
+
+          <button class="button" onclick="toggleFullscreen()">Fullscreen</button>
+      </div>
+      <div class="vlc-copy-box" id="vlcBox" style="display:none;">
+          <strong>External Player URL:</strong>
+          <code id="vlcText"></code>
+          <span class="copy-feedback" id="copyFeedback">Copied!</span>
+      </div>
+  </div>
+
+</div> <!-- End #cinemaghar-container -->
+
+<script type="text/javascript">
+// <![CDATA[
+
+const config = {
+    GSheetWebAppURL: "https://script.google.com/macros/s/AKfycbyng7FXpp3dj5E3HSrEeDhLfivVjB4V3UVSbV8N_2RyNKYQEMXT_n89IhUH5IDC3-mvig/exec",
+    HDR_LOGO_URL: "https://as1.ftcdn.net/v2/jpg/05/32/83/72/1000_F_532837228_v8CGZRU0jy39uCtqFRnJz6xDntrGuLLx.webp",
+    FOURK_LOGO_URL: "https://i.pinimg.com/736x/85/c4/b0/85c4b0a2fb8612825d0cd2f53460925f.jpg",
+    ITEMS_PER_PAGE: 50,
+    LOCAL_STORAGE_KEY: 'cinemaGharState_v2',
+    PLAYER_VOLUME_KEY: 'cinemaGharPlayerVolume',
+    PLAYER_SPEED_KEY: 'cinemaGharPlayerSpeed'
+    // FULLSCREEN_CONTROL_TIMEOUT_MS removed - no longer needed
+};
+
+let allMovieData = [];
+let filteredAndSortedData = [];
+let uniqueQualities = new Set();
+let activeActionRow = null; // Reference to the currently open action row DOM element
+let copyTimeout; // Timeout ID for copy feedback
+// fullscreenControlsTimeout removed
+
+// --- State Management ---
+let currentState = {
+    searchTerm: '',
+    qualityFilter: '',
+    sortColumn: 'lastUpdated', // Default sort
+    sortDirection: 'desc',     // Default direction
+    currentPage: 1
+};
+
+// --- DOM Element References ---
+const container = document.getElementById('cinemaghar-container');
+const videoContainer = document.getElementById('videoContainer');
+const videoElement = document.getElementById('html5VideoPlayer');
+const videoTitle = document.getElementById('videoTitle');
+const vlcBox = document.getElementById('vlcBox');
+const vlcText = document.getElementById('vlcText');
+const searchInput = document.getElementById('searchInput');
+const searchButton = document.getElementById('searchButton');
+const qualityFilterSelect = document.getElementById('qualityFilterSelect');
+const audioWarningDiv = document.getElementById('audioWarning');
+const updatesSection = document.getElementById('updatesSection');
+const updatesTableBody = document.getElementById('updatesTableBody');
+const movieTableBody = document.getElementById('movieTableBody');
+const movieTableHead = document.querySelector('#movieTable thead');
+const muteButton = document.getElementById('muteButton');
+const volumeSlider = document.getElementById('volumeSlider');
+const playbackSpeedSelect = document.getElementById('playbackSpeedSelect');
+const customControlsContainer = document.getElementById('customControlsContainer');
+const audioTrackSelect = document.getElementById('audioTrackSelect');
+const copyFeedbackSpan = document.getElementById('copyFeedback');
+const paginationControlsContainer = document.getElementById('paginationControls');
+// playerCloseButton reference remains useful for non-fullscreen closePlayer() calls
+const playerCloseButton = document.querySelector('.video-container .close-btn');
+
+
+// --- Utility Functions ---
+
+/**
+ * Sanitizes a string to prevent XSS by converting it to text content.
+ * @param {any} str - The input value to sanitize.
+ * @returns {string} The sanitized string.
+ */
+const sanitize = (str) => {
+    if (str === null || typeof str === 'undefined') return "";
+    const temp = document.createElement('div');
+    temp.textContent = String(str);
+    return temp.innerHTML;
+};
+
+/**
+ * Formats ISO date strings into human-readable relative time or full date.
+ */
+const TimeAgo = {
+  MINUTE: 60, HOUR: 3600, DAY: 86400, WEEK: 604800, MONTH: 2592000, YEAR: 31536000,
+  format: (isoString) => {
+    if (!isoString) return 'N/A';
+    try {
+      const date = new Date(isoString);
+      const seconds = Math.floor((new Date() - date) / 1000);
+      if (isNaN(seconds) || seconds < 0) { // Handle invalid or future dates
+        return TimeAgo.formatFullDate(date); // Show full date for invalid/future
+      }
+      if (seconds < 2) return "just now";
+      if (seconds < TimeAgo.MINUTE) return `${seconds} sec${seconds > 1 ? 's' : ''} ago`;
+      if (seconds < TimeAgo.HOUR) return `${Math.floor(seconds / TimeAgo.MINUTE)} min${Math.floor(seconds / TimeAgo.MINUTE) > 1 ? 's' : ''} ago`;
+      if (seconds < TimeAgo.DAY) return `${Math.floor(seconds / TimeAgo.HOUR)} hr${Math.floor(seconds / TimeAgo.HOUR) > 1 ? 's' : ''} ago`;
+      if (seconds < TimeAgo.DAY * 2) return "Yesterday";
+      if (seconds < TimeAgo.WEEK) return `${Math.floor(seconds / TimeAgo.DAY)} days ago`;
+      return TimeAgo.formatFullDate(date, true); // Use short format for older dates
+    } catch (e) {
+      console.error("Date Format Error (TimeAgo):", isoString, e);
+      return 'Invalid Date';
+    }
+  },
+  formatFullDate: (date, short = false) => {
+      if (!(date instanceof Date) || isNaN(date.getTime())) return 'Invalid Date';
+      const optsDate = short
+        ? { year: '2-digit', month: 'numeric', day: 'numeric' } // e.g., 12/25/23
+        : { year: 'numeric', month: 'short', day: 'numeric' }; // e.g., Dec 25, 2023
+      const optsTime = { hour: 'numeric', minute: '2-digit', hour12: true }; // e.g., 1:30 PM
+      try {
+        return `${date.toLocaleDateString(undefined, optsDate)}${short ? '' : ', ' + date.toLocaleTimeString(undefined, optsTime)}`;
+      } catch (e) {
+          console.error("toLocaleDateString/Time failed:", e);
+          // Fallback to basic YYYY-MM-DD if locale formatting fails
+          return `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}-${String(date.getDate()).padStart(2,'0')}`;
+      }
+  }
+};
+
+/**
+ * Extracts file size (e.g., "1.2 GB") from a string and returns structured data.
+ * @param {string} filename - The string to parse.
+ * @returns {object} Object with value, unit, display string, and bytes.
+ */
+function extractSizeData(filename) {
+    if (!filename) return { value: 0, unit: '', display: 'N/A', bytes: 0 };
+    // Regex to find size like (1.2 GB) or [200MB] etc.
+    const r = /[\(\[]?(?<size>[\d.]+)\s?(?<unit>GB|MB)[\)\]]?/i;
+    const m = filename.match(r);
+    if (m?.groups?.size && m?.groups?.unit) {
+        const value = parseFloat(m.groups.size);
+        const unit = m.groups.unit.toUpperCase();
+        if (!isNaN(value)) {
+            const bytes = unit === 'GB' ? value * 1024 * 1024 * 1024 : value * 1024 * 1024;
+            return { value: value, unit: unit, display: `${value} ${unit}`, bytes: isNaN(bytes) ? 0 : bytes };
+        }
+    }
+    // If not found in standard format, return N/A
+    return { value: 0, unit: '', display: 'N/A', bytes: 0 };
+}
+
+/**
+ * Attempts to determine the MIME type from a URL's file extension.
+ * @param {string} url - The URL string.
+ * @returns {string} The guessed MIME type or a generic 'video/*'.
+ */
+function getMimeTypeFromUrl(url) {
+    if (!url) return 'video/*'; // Default generic video MIME type
+    // Match the file extension from the URL, ignoring query parameters or fragments
+    const m = url.match(/\.([a-zA-Z0-9]+)(?:[?#]|$)/);
+    if (!m) return 'video/*'; // Return generic if no extension found
+    const ext = m[1].toLowerCase(); // Get the extension in lowercase
+
+    // Map common video extensions to their MIME types
+    const mimeMap = {
+        'mkv': 'video/x-matroska', 'mp4': 'video/mp4', 'mov': 'video/quicktime',
+        'avi': 'video/x-msvideo', 'webm': 'video/webm', 'wmv': 'video/x-ms-wmv',
+        'flv': 'video/x-flv', 'ts': 'video/mp2t', 'm4v': 'video/x-m4v',
+        'ogv': 'video/ogg'
+        // Add more mappings if needed
+    };
+    // Return the specific MIME type if found, otherwise the generic one
+    return mimeMap[ext] || 'video/*';
+}
+
+/**
+ * Handles errors during HTML5 video playback.
+ * @param {Event} event - The error event object.
+ */
+function handleVideoError(event) {
+    console.error("HTML5 Video Error:", event, videoElement?.error);
+    let msg = "An unknown error occurred while trying to play the video.";
+    if (videoElement?.error) {
+        switch (videoElement.error.code) {
+            case MediaError.MEDIA_ERR_ABORTED: msg = 'Playback was aborted by the user or script.'; break;
+            case MediaError.MEDIA_ERR_NETWORK: msg = 'A network error caused the video download to fail part-way.'; break;
+            case MediaError.MEDIA_ERR_DECODE: msg = 'The video playback was aborted due to a corruption problem or because the video used features your browser did not support (e.g., unsupported codec).'; break;
+            case MediaError.MEDIA_ERR_SRC_NOT_SUPPORTED: msg = 'The video could not be loaded, either because the server or network failed or because the format is not supported by your browser.'; break;
+            default: msg = `An unknown video error occurred (Code: ${videoElement.error.code}).`; break;
+        }
+    }
+    // Display the error in the audio warning div
+    if (audioWarningDiv) {
+        audioWarningDiv.innerHTML = `<strong>Playback Error:</strong> ${sanitize(msg)} <br>Consider using 'Copy URL' with an external player like VLC or MX Player, or try the 'Open Externally' button if available (Android).`;
+        audioWarningDiv.style.display = 'block';
+    }
+}
+// Attach the error handler to the video element
+if (videoElement) { videoElement.addEventListener('error', handleVideoError); }
+
+
+/**
+ * Extracts a quality indicator (e.g., "1080p", "BluRay") from a filename.
+ * Prioritizes resolution, then source type.
+ * @param {string} filename - The filename string.
+ * @returns {string|null} The extracted quality string or null if none found.
+ */
+function extractQualityFromFilename(filename) {
+    if (!filename) return null;
+    // Patterns to match quality indicators, ordered by priority (resolution first)
+    const patterns = [
+        // Resolution (4K, 2160p, 1080p, 720p, 480p) - more specific match
+        /(?:^|\.|\[|\(|\s|_|-)((?:4k|2160p|1080p|720p|480p))(?=$|\.|\]|\)|\s|_|-)/i,
+        // Source Type (WEBDL, BluRay, HDTV, etc.)
+        /(?:^|\.|\[|\(|\s|_-)(WEB-?DL|WEBRip|BluRay|BDRip|BRRip|HDTV|HDRip|DVDrip|DVDScr|HDCAM|HC|TC|TS|CAM)(?=$|\.|\]|\)|\s|_|-)/i,
+         // Specific Tech/Codec (HDR, Dolby Vision, HEVC) - lower priority for main display, but useful
+         /(?:^|\.|\[|\(|\s|_-)(HDR|DV|Dolby.?Vision|HEVC|x265)(?=$|\.|\]|\)|\s|_|-)/i
+    ];
+    let foundQuality = null;
+    for (const regex of patterns) {
+        const match = filename.match(regex);
+        if (match && match[1]) {
+            let quality = match[1].toUpperCase();
+            // Normalize common variations
+            quality = quality.replace(/WEB-?DL/i, 'WEBDL');
+            quality = quality.replace(/BLURAY/i, 'BluRay');
+            quality = quality.replace(/DVDRIP/i, 'DVD');
+            quality = quality.replace(/DOLBY.?VISION/i, 'Dolby Vision');
+            if (quality === '2160P') quality = '4K'; // Standardize 4K
+
+            // If we found a resolution or source type, return it immediately (highest priority)
+            if (patterns.indexOf(regex) < 2) {
+                return quality;
+            }
+            // If it's a tech/codec and we haven't found a quality yet, store it as a fallback
+            if (patterns.indexOf(regex) === 2 && !foundQuality) {
+                foundQuality = quality;
+            }
+        }
+    }
+    // Return the tech/codec if no resolution or source was found, otherwise null
+    return foundQuality;
+}
+
+/**
+ * Normalizes text for searching (lowercase, removes specific punctuation WITHOUT adding space, collapses whitespace).
+ * @param {string} text - The input string.
+ * @returns {string} The normalized string.
+ */
+function normalizeTextForSearch(text) {
+    if (!text) return "";
+    return String(text)
+        .toLowerCase()
+        // Remove specific punctuation characters entirely
+        .replace(/[.\-_\(\)\[\]]/g, '')
+        // Collapse multiple whitespace characters (spaces, tabs, newlines) into a single space
+        .replace(/\s+/g, ' ')
+        // Remove leading/trailing whitespace
+        .trim();
+}
+
+
+/**
+ * Preprocesses raw movie data fetched from the source.
+ * Adds calculated fields like display filename, size, quality, timestamp, and search text.
+ * @param {object} movie - The raw movie object from the data source.
+ * @returns {object} The processed movie object with added fields.
+ */
+function preprocessMovieData(movie) {
+    // 1. Determine Display Filename (prefer explicit, fallback to URL, then placeholder)
+    movie.displayFilename = sanitize(movie.filename || ''); // Start with explicit filename if provided
+    movie.filenameSource = 'sheet'; // Track where the filename came from
+    if (!movie.displayFilename && movie.url) { // If no explicit filename, try deriving from URL
+        try {
+            const urlObject = new URL(movie.url);
+            let potentialFilename = '';
+            // Check common patterns in URL for filename (e.g., last path segment, 'path' param)
+            const pathParam = urlObject.searchParams.get('path');
+            if (pathParam) {
+                const pathSegments = pathParam.split('/').filter(segment => segment); // Get non-empty segments
+                if (pathSegments.length > 0) potentialFilename = decodeURIComponent(pathSegments[pathSegments.length - 1]);
+            }
+            // If not found in param, check the pathname
+            if (!potentialFilename && urlObject.pathname && urlObject.pathname !== '/') {
+                const pathSegments = urlObject.pathname.split('/').filter(segment => segment);
+                // Check if the last segment looks like a filename (contains '.')
+                if (pathSegments.length > 0 && pathSegments[pathSegments.length - 1].includes('.')) {
+                    potentialFilename = decodeURIComponent(pathSegments[pathSegments.length - 1]);
+                }
+            }
+            if (potentialFilename) {
+                movie.displayFilename = sanitize(potentialFilename);
+                movie.filenameSource = 'url'; // Mark as derived from URL
+            }
+        } catch (e) { console.warn("URL parsing failed for filename extraction:", movie.url, e); }
+    }
+    // If still no filename, create a placeholder
+    if (!movie.displayFilename) {
+        movie.displayFilename = `File (ID: ${sanitize(movie.id || 'N/A')})`;
+        movie.filenameSource = 'placeholder';
+    }
+
+    // 2. Determine Size (prefer explicit 'size' field, fallback to extracting from filename)
+    movie.sizeData = { display: 'N/A', bytes: 0 }; // Initialize size data
+    // Check if an explicit size is provided and is not 'N/A'
+    if (movie.size && String(movie.size).toLowerCase() !== 'n/a') {
+         // Try parsing the explicit size field (treat it like a filename snippet)
+         const explicitSize = extractSizeData(`[${movie.size}]`);
+         if (explicitSize && explicitSize.bytes > 0) movie.sizeData = explicitSize;
+    }
+    // If no valid explicit size, try extracting from the display filename
+    if (movie.sizeData.bytes === 0 && movie.filenameSource !== 'placeholder') {
+        const extractedSize = extractSizeData(movie.displayFilename);
+        if (extractedSize && extractedSize.bytes > 0) movie.sizeData = extractedSize;
+    }
+
+    // 3. Determine Quality (prefer explicit 'quality' field, fallback to extracting from filename)
+    movie.displayQuality = sanitize(movie.quality || 'N/A'); // Start with explicit quality
+    // If no explicit quality or it's 'N/A', try extracting from filename
+    if ((!movie.quality || String(movie.quality).toLowerCase() === 'n/a') && movie.filenameSource !== 'placeholder') {
+        const extractedQuality = extractQualityFromFilename(movie.displayFilename);
+        if (extractedQuality) movie.displayQuality = sanitize(extractedQuality); // Use extracted if found
+    }
+    // Add the determined quality to the set for the filter dropdown (if valid)
+    if (movie.displayQuality && movie.displayQuality !== 'N/A') {
+        uniqueQualities.add(movie.displayQuality);
+    }
+
+    // 4. Parse Last Updated Timestamp
+    movie.lastUpdatedTimestamp = 0; // Default to 0
+    if (movie.lastUpdated) {
+        try {
+            const parsedDate = new Date(movie.lastUpdated);
+            // Check if the parsed date is valid before getting the timestamp
+            if (!isNaN(parsedDate.getTime())) {
+                movie.lastUpdatedTimestamp = parsedDate.getTime();
+            } else {
+                 console.warn("Invalid date format encountered for lastUpdated:", movie.lastUpdated);
+            }
+        } catch (e) { console.warn("Error parsing lastUpdated date:", movie.lastUpdated, e); }
+    }
+
+    // 5. Parse Numeric ID (for sorting)
+    movie.numericId = Infinity; // Default for items without a parsable ID (sorts last)
+    if (movie.id) {
+        // Extract digits from the ID string and parse as integer
+        const parsedId = parseInt(String(movie.id).replace(/\D/g, ''), 10);
+        if (!isNaN(parsedId)) movie.numericId = parsedId;
+    }
+
+    // 6. Create Normalized Search Text (for filtering)
+    // Combine relevant fields into a single string for searching
+    movie.searchText = normalizeTextForSearch(`${movie.id || ''} ${movie.displayFilename}`);
+
+    return movie; // Return the processed movie object
+}
+
+
+/**
+ * Generates the HTML string for a single movie row and its corresponding action row.
+ * @param {object} movie - The processed movie data object.
+ * @param {number} index - The index of the movie (used for unique IDs).
+ * @param {string} context - A prefix for IDs ('upd' for updates, 'rec' for recent).
+ * @returns {string} The combined HTML string for the main and action rows.
+ */
+function createMovieRowsHTML(movie, index, context) {
+    // Generate a unique ID part based on movie ID or index
+    const uniqueIdPart = movie.id ? String(movie.id).replace(/[^a-zA-Z0-9-_]/g, '') : `gen-${index}`;
+    const actionRowId = `${context}-actions-${uniqueIdPart}`; // ID for the hidden action row
+
+    // Get processed display values
+    const displayFilename = movie.displayFilename;
+    const displaySize = movie.sizeData.display;
+    const displayQuality = movie.displayQuality;
+
+    // Create a cleaner title for the stream player
+    const streamTitle = displayFilename
+        .split(/[\.\(\[]/)[0] // Take the part before the first dot, parenthesis, or bracket
+        .replace(/[_ ]+/g, ' ').trim() // Replace underscores/multiple spaces with single space
+        + (displayQuality !== 'N/A' ? ` (${displayQuality})` : ''); // Append quality if available
+
+    // Format dates for display and tooltip
+    const formattedDateRelative = TimeAgo.format(movie.lastUpdated);
+    const formattedDateFull = movie.lastUpdatedTimestamp > 0 ? TimeAgo.formatFullDate(new Date(movie.lastUpdatedTimestamp)) : 'N/A';
+
+    // Generate logos for 4K/HDR based on quality and filename hints
+    let hdrLogoHtml = '';
+    let fourkLogoHtml = '';
+    const lowerFilename = displayFilename.toLowerCase();
+    if (displayQuality === '4K' || lowerFilename.includes('2160p') || lowerFilename.includes('.4k.')) {
+        fourkLogoHtml = `<img src="${config.FOURK_LOGO_URL}" alt="4K" class="quality-logo fourk-logo" title="4K Ultra HD" />`;
+    }
+    if (displayQuality.includes('HDR') || displayQuality.includes('DOLBY VISION') || displayQuality === 'DV' ||
+        lowerFilename.includes('hdr') || lowerFilename.includes('dolby.vision') || lowerFilename.includes('.dv.')) {
+        hdrLogoHtml = `<img src="${config.HDR_LOGO_URL}" alt="HDR/DV" class="quality-logo hdr-logo" title="HDR / Dolby Vision Content" />`;
+    }
+
+    // Escape quotes in strings that will be used inside JavaScript function calls in HTML attributes
+    const escapedStreamTitle = streamTitle.replace(/'/g, "\\'");
+    const escapedFilename = displayFilename.replace(/'/g, "\\'");
+
+    // Determine the colspan for the action row TD (accounts for hidden columns on mobile via CSS)
+    // For simplicity and robustness with CSS hiding columns, setting it statically.
+    // The CSS ensures the TD takes full width on mobile anyway (`display: block`).
+    const colspanValue = 6;
+
+    // --- Main Data Row HTML ---
+    const mainRowHTML = `
+        <tr class="movie-data-row">
+            <td class="col-id">${sanitize(movie.id || 'N/A')}</td>
+            <td class="col-filename" title="Click to view details: ${displayFilename}" onclick="toggleActions(this, '${actionRowId}')">
+                ${displayFilename}${fourkLogoHtml}${hdrLogoHtml}
+            </td>
+            <td class="col-size">${displaySize}</td>
+            <td class="col-quality">${displayQuality}</td>
+            <td class="col-updated" title="${formattedDateFull}">${formattedDateRelative}</td>
+            <td class="col-view"><button class="button view-button" onclick="toggleActions(this, '${actionRowId}')">View</button></td>
+        </tr>
+    `;
+
+    // --- Action Buttons HTML (Conditional) ---
+    let actionButtonsHTML = '';
+    if (movie.url) { // Only show stream/download buttons if a direct URL exists
+        actionButtonsHTML += `<button class="button play-button" onclick="streamVideo('${escapedStreamTitle}', '${sanitize(movie.url)}', '${escapedFilename}')">Play here</button>`;
+        actionButtonsHTML += `<a class="button download-button" href="${sanitize(movie.url)}" download="${displayFilename}" target="_blank" rel="noopener noreferrer">Direct Download</a>`;
+        actionButtonsHTML += `<button class="button vlc-button" onclick="copyVLCLink(this, '${sanitize(movie.url)}')">Copy URL (for VLC/MX)</button>`;
+        // Check for Android user agent to show the "Open Externally" button
+        if (navigator.userAgent.toLowerCase().includes("android")) {
+             actionButtonsHTML += `<button class="button intent-button" onclick="openWithIntent('${sanitize(movie.url)}')">Open Externally (Android)</button>`;
+        }
+    }
+    // Add buttons for other link types if they exist
+    if (movie.telegramLink) actionButtonsHTML += `<a class="button telegram-button" href="${sanitize(movie.telegramLink)}" target="_blank" rel="noopener noreferrer">Telegram File</a>`;
+
+    // START CHANGE: Conditional GDFLIX button text
+    if (movie.gdflixLink) {
+        // Determine the button text based on the URL content
+        let gdflixButtonText = "GDFLIX"; // Default text
+        if (movie.gdflixLink.includes('/pack/')) { // Check if link contains '/pack/'
+            gdflixButtonText = "GDFLIX (pack)"; // Change text if found
+        }
+        // Construct the button HTML using the determined text
+        actionButtonsHTML += `<a class="button gdflix-button" href="${sanitize(movie.gdflixLink)}" target="_blank" rel="noopener noreferrer">${gdflixButtonText}</a>`;
+    }
+    // END CHANGE
+
+    if (movie.hubcloudLink) actionButtonsHTML += `<a class="button hubcloud-button" href="${sanitize(movie.hubcloudLink)}" target="_blank" rel="noopener noreferrer">HubCloud</a>`;
+    if (movie.filepressLink) actionButtonsHTML += `<a class="button filepress-button" href="${sanitize(movie.filepressLink)}" target="_blank" rel="noopener noreferrer">Filepress</a>`;
+    if (movie.gdtotLink) actionButtonsHTML += `<a class="button gdtot-button" href="${sanitize(movie.gdtotLink)}" target="_blank" rel="noopener noreferrer">GDToT</a>`;
+
+    // If no buttons were generated, show a message
+    if (!actionButtonsHTML) {
+        actionButtonsHTML = '<span style="color: var(--text-muted); font-style: italic; text-align: center; width: 100%; display: block; padding: 10px 0;">No stream/download actions available</span>';
+    }
+
+    // --- Action Row HTML ---
+    const actionRowHTML = `
+        <tr id="${actionRowId}" class="action-row" style="display: none;">
+            <td colspan="${colspanValue}">
+                <div class="action-info">
+                    <span class="info-item"><strong>Filename:</strong> ${displayFilename}</span>
+                    <span class="info-item"><strong>Quality:</strong> ${displayQuality} ${fourkLogoHtml} ${hdrLogoHtml}</span>
+                    <span class="info-item"><strong>Size:</strong> ${displaySize}</span>
+                    <span class="info-item"><strong>Language:</strong> ${sanitize(movie.languages || 'N/A')}</span>
+                    <span class="info-item"><strong>Updated:</strong> ${formattedDateFull} (${formattedDateRelative})</span>
+                    ${(movie.filenameSource !== 'sheet' && movie.filename && movie.filename !== movie.displayFilename)
+                       ? `<span class="info-item"><strong>Original Name:</strong> ${sanitize(movie.filename)}</span>` // Show original if different
+                       : ''}
+                </div>
+                <div class="action-buttons-container">
+                   ${actionButtonsHTML}
+                </div>
+                <!-- Video player container will be moved into this TD dynamically when 'Play here' is clicked -->
+            </td>
+        </tr>`;
+
+    return mainRowHTML + actionRowHTML; // Combine the two rows
+}
+
+/**
+ * Renders the Updates and Recent Movies tables based on the current state.
+ */
+function renderTables() {
+    const now = Date.now();
+    const twentyFourHoursAgo = now - (24 * 60 * 60 * 1000); // Timestamp 24 hours ago
+
+    // --- Render Updates Table ---
+    let updatesHtml = '';
+    let updatesFound = false;
+    let updateIndex = 0;
+    // Sort original data by most recent update time for the "Updates" section
+    const sortedOriginalDataForUpdates = [...allMovieData].sort((a, b) => b.lastUpdatedTimestamp - a.lastUpdatedTimestamp);
+    sortedOriginalDataForUpdates.forEach((movie) => {
+        // Include if updated within the last 24 hours AND has an ID and some content/link
+        if (movie.lastUpdatedTimestamp >= twentyFourHoursAgo) {
+            if (movie.id && (movie.filenameSource !== 'placeholder' || movie.url || movie.gdflixLink || movie.hubcloudLink || movie.filepressLink || movie.telegramLink || movie.gdtotLink)) {
+                updatesHtml += createMovieRowsHTML(movie, updateIndex, 'upd'); // Use 'upd' context for unique IDs
+                updatesFound = true;
+                updateIndex++;
+            }
+        }
+    });
+    updatesTableBody.innerHTML = updatesFound ? updatesHtml : '<tr><td colspan="6" class="status-message">No updates in the last 24 hours.</td></tr>';
+    // Hide updates section if a search term is active
+    if (updatesSection) updatesSection.style.display = currentState.searchTerm ? 'none' : 'block';
+
+    // --- Render Recent Movies Table (Paginated) ---
+    let movieHtml = '';
+    const totalItems = filteredAndSortedData.length; // Use pre-filtered/sorted data
+    const totalPages = Math.ceil(totalItems / config.ITEMS_PER_PAGE);
+
+    // Validate current page number
+    if (currentState.currentPage < 1) currentState.currentPage = 1;
+    if (currentState.currentPage > totalPages && totalPages > 0) currentState.currentPage = totalPages; // Go to last page if current is too high
+    if (totalItems === 0) currentState.currentPage = 1; // Reset to 1 if no items
+
+    // Calculate slice indices for the current page
+    const startIndex = (currentState.currentPage - 1) * config.ITEMS_PER_PAGE;
+    const endIndex = Math.min(startIndex + config.ITEMS_PER_PAGE, totalItems);
+    const pageData = filteredAndSortedData.slice(startIndex, endIndex);
+
+    // Generate HTML for the current page
+    if (totalItems === 0) {
+        // Show appropriate message if no results
+        movieTableBody.innerHTML = `<tr><td colspan="6" class="status-message">${currentState.searchTerm || currentState.qualityFilter ? 'No movies found matching your criteria.' : 'Loading movies or no movies listed yet.'}</td></tr>`;
+        if (paginationControlsContainer) paginationControlsContainer.style.display = 'none'; // Hide pagination
+    } else {
+        pageData.forEach((movie, index) => movieHtml += createMovieRowsHTML(movie, startIndex + index, 'rec')); // Use 'rec' context
+        movieTableBody.innerHTML = movieHtml;
+        renderPaginationControls(totalItems, totalPages); // Render pagination
+        if (paginationControlsContainer) paginationControlsContainer.style.display = 'block'; // Show pagination
+    }
+
+    // Update visual indicators for sort/filter
+    updateSortIndicators();
+    updateFilterIndicator();
+
+    // --- Handle Active Action Row State ---
+    // If an action row was open, check if its corresponding main row is still visible after re-render
+    if (activeActionRow && activeActionRow.style.display !== 'none') {
+        const mainRow = activeActionRow.previousElementSibling;
+        const isMainRowVisible = (movieTableBody.contains(mainRow) || updatesTableBody.contains(mainRow));
+        if (!isMainRowVisible) {
+             // If main row disappeared (due to filter/page change), close the player and the action row
+             closePlayer();
+             activeActionRow.style.display = 'none';
+             activeActionRow = null;
+        }
+    } else if (activeActionRow && activeActionRow.style.display === 'none') {
+         // If the active row was somehow hidden, clear the reference
+         activeActionRow = null;
+         closePlayerIfNeeded(); // Ensure player is closed if no row is active
+    }
+}
+
+
+/**
+ * Renders the pagination controls based on total items and current page.
+ * @param {number} totalItems - Total number of items after filtering.
+ * @param {number} totalPages - Total number of pages.
+ */
+function renderPaginationControls(totalItems, totalPages) {
+    if (!paginationControlsContainer) return;
+    paginationControlsContainer.innerHTML = ''; // Clear previous controls
+    if (totalPages <= 1) {
+        paginationControlsContainer.style.display = 'none'; // Hide if only one page or less
+        return;
+    }
+
+    let paginationHTML = '';
+    const currentPage = currentState.currentPage;
+
+    // Previous Button
+    paginationHTML += `<button onclick="changePage(${currentPage - 1})" ${currentPage === 1 ? 'disabled title="Already on first page"' : 'title="Go to previous page"'}>« Prev</button>`;
+
+    // Page Number Buttons (with ellipsis logic)
+    const maxPagesToShow = 5; // Max number of direct page links shown (excluding first/last)
+    const halfPages = Math.floor(maxPagesToShow / 2);
+
+    if (totalPages <= maxPagesToShow + 2) { // Show all pages if total is small
+        for (let i = 1; i <= totalPages; i++) {
+            paginationHTML += (i === currentPage) ? `<span class="current-page">${i}</span>` : `<button onclick="changePage(${i})" title="Go to page ${i}">${i}</button>`;
+        }
+    } else { // Show ellipsis logic for large number of pages
+        // Determine start and end page numbers for the middle block
+        let startPage = Math.max(2, currentPage - halfPages);
+        let endPage = Math.min(totalPages - 1, currentPage + halfPages);
+
+        // Adjust start/end if near the beginning or end
+        if (currentPage <= halfPages + 1) { // Near the start
+            endPage = Math.min(totalPages - 1, maxPagesToShow);
+        }
+        if (currentPage >= totalPages - halfPages) { // Near the end
+            startPage = Math.max(2, totalPages - maxPagesToShow + 1);
+        }
+
+        // First page button
+        paginationHTML += (1 === currentPage) ? `<span class="current-page">1</span>` : `<button onclick="changePage(1)" title="Go to page 1">1</button>`;
+
+        // Ellipsis after first page?
+        if (startPage > 2) paginationHTML += `<span class="page-info" title="Skipped pages">...</span>`;
+
+        // Middle page buttons
+        for (let i = startPage; i <= endPage; i++) {
+            paginationHTML += (i === currentPage) ? `<span class="current-page">${i}</span>` : `<button onclick="changePage(${i})" title="Go to page ${i}">${i}</button>`;
+        }
+
+        // Ellipsis before last page?
+        if (endPage < totalPages - 1) paginationHTML += `<span class="page-info" title="Skipped pages">...</span>`;
+
+        // Last page button
+        paginationHTML += (totalPages === currentPage) ? `<span class="current-page">${totalPages}</span>` : `<button onclick="changePage(${totalPages})" title="Go to page ${totalPages}">${totalPages}</button>`;
+    }
+
+    // Next Button
+    paginationHTML += `<button onclick="changePage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled title="Already on last page"' : 'title="Go to next page"'}>Next »</button>`;
+
+    // Update the container and make it visible
+    paginationControlsContainer.innerHTML = paginationHTML;
+    paginationControlsContainer.style.display = 'block';
+}
+
+/**
+ * Applies current search, filter, and sort criteria to the data, then renders the table.
+ */
+function applyUserActions() {
+    // --- Filtering ---
+    const normalizedSearch = normalizeTextForSearch(currentState.searchTerm);
+    // Split search term into keywords for more flexible matching
+    const searchKeywords = normalizedSearch ? normalizedSearch.split(' ').filter(k => k) : []; // Filter out empty strings
+
+    filteredAndSortedData = allMovieData.filter(movie => {
+        // Apply quality filter
+        if (currentState.qualityFilter && movie.displayQuality !== currentState.qualityFilter) {
+            return false;
+        }
+        // Apply search term filter (match all keywords)
+        if (searchKeywords.length > 0 && !searchKeywords.every(keyword => movie.searchText.includes(keyword))) {
+            return false;
+        }
+        // Mark if it's an exact match for potential boosting in sort (optional)
+        movie.isExactMatch = searchKeywords.length > 0 && movie.searchText.includes(normalizedSearch);
+        return true; // Include if passes filters
+    });
+
+    // --- Sorting ---
+    const sortKey = currentState.sortColumn;
+    const direction = currentState.sortDirection === 'asc' ? 1 : -1; // 1 for asc, -1 for desc
+
+    filteredAndSortedData.sort((a, b) => {
+        // Optional: Boost exact matches to the top if searching
+        if (searchKeywords.length > 0 && a.isExactMatch !== b.isExactMatch) {
+            return a.isExactMatch ? -1 : 1;
+        }
+
+        // Get values to compare based on the sort key
+        let valA, valB;
+        switch (sortKey) {
+            case 'id': valA = a.numericId; valB = b.numericId; break;
+            case 'filename': valA = a.displayFilename.toLowerCase(); valB = b.displayFilename.toLowerCase(); break;
+            case 'size': valA = a.sizeData.bytes; valB = b.sizeData.bytes; break;
+            case 'quality': valA = a.displayQuality.toLowerCase(); valB = b.displayQuality.toLowerCase(); break;
+            case 'lastUpdated': default: valA = a.lastUpdatedTimestamp; valB = b.lastUpdatedTimestamp; break;
+        }
+
+        // Comparison logic (handle null/undefined values gracefully)
+        const aIsLess = (valA === null || typeof valA === 'undefined') || (valA < valB && valB !== null && typeof valB !== 'undefined');
+        const bIsLess = (valB === null || typeof valB === 'undefined') || (valB < valA && valA !== null && typeof valA !== 'undefined');
+
+        if (aIsLess) return -1 * direction;
+        if (bIsLess) return 1 * direction;
+
+        // Secondary sort: Use descending numeric ID for stability if primary values are equal
+        if (b.numericId < a.numericId) return -1; // Newer ID first
+        if (b.numericId > a.numericId) return 1;
+
+        return 0; // Items are equal
+    });
+
+    // --- Render ---
+    renderTables(); // Update the displayed tables and pagination
+    saveStateToLocalStorage(); // Persist the current state
+}
+
+
+/**
+ * Handles clicks on sortable table headers.
+ * @param {Event} event - The click event.
+ */
+function handleSort(event) {
+    // Find the closest sortable TH element clicked
+    const header = event.target.closest('th.sortable');
+    if (!header) return; // Click was not on a sortable header
+    const sortKey = header.dataset.sortKey;
+    if (!sortKey) return; // Header missing data-sort-key
+
+    // Determine new sort direction
+    if (currentState.sortColumn === sortKey) {
+        // If clicking the same column, reverse the direction
+        currentState.sortDirection = currentState.sortDirection === 'asc' ? 'desc' : 'asc';
+    } else {
+        // If clicking a new column, set the default direction
+        currentState.sortColumn = sortKey;
+        // Default 'asc' for text columns, 'desc' for numeric/date columns
+        currentState.sortDirection = ['filename', 'quality'].includes(sortKey) ? 'asc' : 'desc';
+    }
+
+    currentState.currentPage = 1; // Reset to page 1 when sort changes
+    closePlayerIfNeeded(); // Close player if open
+    applyUserActions(); // Apply the new sort and re-render
+}
+
+/**
+ * Updates the visual indicators (arrows) on table headers for sorting.
+ */
+function updateSortIndicators() {
+    if (!movieTableHead) return;
+    // Loop through all sortable headers
+    movieTableHead.querySelectorAll('th.sortable').forEach(th => {
+        th.classList.remove('sort-asc', 'sort-desc'); // Remove existing sort classes
+        // If this header is the currently sorted column, add the appropriate class
+        if (th.dataset.sortKey === currentState.sortColumn) {
+            th.classList.add(currentState.sortDirection === 'asc' ? 'sort-asc' : 'sort-desc');
+            // Set ARIA attribute for accessibility
+            th.setAttribute('aria-sort', currentState.sortDirection === 'asc' ? 'ascending' : 'descending');
+        } else {
+            // Remove ARIA attribute if not the sorted column
+            th.removeAttribute('aria-sort');
+        }
+    });
+}
+
+/**
+ * Updates the visual style of the quality filter select element (adds/removes 'filter-active' class).
+ */
+function updateFilterIndicator() {
+    if (!qualityFilterSelect) return;
+    // Add the class if a quality filter is selected, remove it otherwise
+    qualityFilterSelect.classList.toggle('filter-active', !!currentState.qualityFilter);
+}
+
+
+/**
+ * Changes the current page and re-renders the table.
+ * @param {number} newPage - The page number to navigate to.
+ */
+function changePage(newPage) {
+    const totalItems = filteredAndSortedData.length;
+    const totalPages = Math.ceil(totalItems / config.ITEMS_PER_PAGE);
+
+    // Validate the new page number and check if it's different from the current page
+    if (newPage >= 1 && newPage <= totalPages && newPage !== currentState.currentPage) {
+        currentState.currentPage = newPage; // Update the current page state
+        closePlayerIfNeeded(); // Close player if open
+        renderTables(); // Re-render the table for the new page
+        saveStateToLocalStorage(); // Save the new page number
+
+        // Scroll the top of the table (below the sticky header) into view
+        const tableElement = document.getElementById('movieTable') || document.getElementById('updatesTable');
+        if (tableElement) {
+            const headerElement = tableElement.querySelector('thead');
+            const headerHeight = headerElement ? headerElement.offsetHeight : 0;
+            const scrollOffset = 20; // Extra space below header
+            const elementPosition = tableElement.getBoundingClientRect().top + window.pageYOffset;
+            const offsetPosition = elementPosition - headerHeight - scrollOffset;
+
+            window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+        }
+    }
+}
+
+
+/**
+ * Toggles the visibility of the action row associated with a clicked element.
+ * Manages the state of the `activeActionRow` and the video player placement.
+ * @param {HTMLElement} clickedElement - The element clicked (button or filename TD).
+ * @param {string} targetRowId - The ID of the action row to toggle.
+ */
+function toggleActions(clickedElement, targetRowId) {
+    const targetRow = document.getElementById(targetRowId);
+    if (!targetRow) return; // Target row not found
+
+    // Find the associated main row and view button
+    let mainRowElement = clickedElement.closest('tr');
+    if (!mainRowElement) return; // Should always find a parent row
+    let buttonElement = mainRowElement.querySelector('.view-button');
+    if (!buttonElement) return; // View button not found
+
+    const isCurrentlyVisible = targetRow.style.display !== 'none'; // Check if target is currently visible
+
+    // If opening a new action row while the player is visible in another, close the player first.
+    if (!isCurrentlyVisible && videoContainer?.style.display === 'flex' && activeActionRow !== targetRow) {
+        closePlayer();
+    }
+
+    // Close any *other* currently open action row
+    if (activeActionRow && activeActionRow !== targetRow && activeActionRow.style.display !== 'none') {
+        activeActionRow.style.display = 'none'; // Hide the other row
+        const otherMainRow = activeActionRow.previousElementSibling;
+        const otherButton = otherMainRow?.querySelector('.view-button');
+        if (otherButton) { // Reset its button text
+            otherButton.textContent = 'View';
+            otherButton.setAttribute('aria-expanded', 'false');
+        }
+        // If the player was inside the row being closed implicitly, ensure it's closed
+        if (videoContainer?.parentElement === activeActionRow.querySelector('td')) {
+            closePlayer();
+        }
+    }
+
+    // Toggle the target row's visibility
+    if (isCurrentlyVisible) {
+        // --- Closing the currently open row ---
+        targetRow.style.display = 'none';
+        buttonElement.textContent = 'View'; // Reset button text
+        buttonElement.setAttribute('aria-expanded', 'false');
+        activeActionRow = null; // No row is active now
+        closePlayer(); // Close player if it was associated with this row
+    } else {
+        // --- Opening the target row ---
+        targetRow.style.display = 'table-row'; // Use 'table-row' for proper table layout
+        buttonElement.textContent = 'Hide'; // Change button text
+        buttonElement.setAttribute('aria-expanded', 'true');
+        activeActionRow = targetRow; // This row is now the active one
+
+        // Ensure the video container element is moved *into* the newly opened action row's cell
+        // This prepares it for potential playback within this row.
+        const actionCell = targetRow.querySelector('td');
+        if (actionCell && videoContainer?.parentElement !== actionCell) {
+             // Reset player state before moving if it was somewhere else
+             if (videoElement && videoElement.hasAttribute('src')) {
+                 videoElement.pause();
+                 videoElement.removeAttribute('src');
+                 videoElement.load();
+             }
+             if (videoContainer) videoContainer.style.display = 'none'; // Ensure it's hidden before moving
+             if (videoContainer) actionCell.appendChild(videoContainer); // Move the player element
+        } else if (!actionCell) {
+            console.error("Could not find action cell to move player into:", targetRowId);
+        }
+
+        // Scroll the main row (just above the action row) into view smoothly after a brief delay
+        setTimeout(() => {
+            const headerElement = document.querySelector('#movieTable thead') || document.querySelector('#updatesTable thead');
+            const headerHeight = headerElement ? headerElement.offsetHeight : 0;
+            const elementRect = mainRowElement.getBoundingClientRect();
+            const absoluteElementTop = elementRect.top + window.pageYOffset;
+            const scrollOffset = 10; // Small offset below header
+            const offsetPosition = absoluteElementTop - headerHeight - scrollOffset;
+            window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+        }, 100); // Delay allows the row to render/expand first
+    }
+}
+
+
+/**
+ * Starts streaming a video in the inline player within the active action row.
+ * @param {string} title - The title to display for the video.
+ * @param {string} url - The URL of the video source.
+ * @param {string} filenameForAudioCheck - The filename to check for audio codec hints.
+ */
+ function streamVideo(title, url, filenameForAudioCheck) {
+     // Ensure essential elements exist and an action row is active
+     if (!videoContainer || !videoElement || !activeActionRow) {
+         console.error("Cannot stream: player container, video element, or active action row not found.");
+         return;
+     }
+
+     // Ensure the video container is correctly placed within the *currently active* action row's cell
+      const actionCell = activeActionRow.querySelector('td');
+      if (!actionCell) { console.error("Cannot stream: action cell not found in active row."); return; }
+      // If the player isn't already in this cell, move it.
+      if (videoContainer.parentElement !== actionCell) {
+          console.warn("Video container not in expected cell. Moving.");
+           // Reset player state if moving from elsewhere
+           if(videoElement && videoElement.hasAttribute('src')) {
+               videoElement.pause();
+               videoElement.removeAttribute('src');
+               videoElement.load();
+           }
+           actionCell.appendChild(videoContainer); // Move the container
+      }
+
+     // Reset UI elements before loading new video
+     if (audioWarningDiv) { audioWarningDiv.style.display = 'none'; audioWarningDiv.innerHTML = ''; }
+     if (audioTrackSelect) { audioTrackSelect.innerHTML = ''; audioTrackSelect.style.display = 'none'; }
+     if (copyFeedbackSpan) copyFeedbackSpan.classList.remove('show'); // Hide copy feedback
+
+     // Load saved settings (volume, speed) or use defaults
+     const savedVolume = localStorage.getItem(config.PLAYER_VOLUME_KEY);
+     const savedSpeed = localStorage.getItem(config.PLAYER_SPEED_KEY);
+     videoElement.volume = (savedVolume !== null) ? Math.max(0, Math.min(1, parseFloat(savedVolume))) : 1; // Default vol 1
+     if (volumeSlider) volumeSlider.value = videoElement.volume; // Update slider visual
+     videoElement.muted = (videoElement.volume === 0); // Mute if volume is 0
+     videoElement.playbackRate = (savedSpeed !== null) ? parseFloat(savedSpeed) : 1; // Default speed 1x
+     if(playbackSpeedSelect) playbackSpeedSelect.value = String(videoElement.playbackRate); // Update speed dropdown
+     updateMuteButton(); // Update mute button text/state
+
+     // --- Check for potential audio issues based on filename ---
+     const ddp51Regex = /\bDDP?([ ._-]?5\.1)?\b/i; // Matches DDP, DDP5.1, DD+5.1 etc.
+     const advancedAudioRegex = /\b(DTS|ATMOS|TrueHD)\b/i; // Matches DTS, Atmos, TrueHD
+     const multiAudioHintRegex = /\b(Multi|Dual)[ ._-]?Audio\b/i; // Matches Multi Audio, Dual-Audio etc.
+     let warningText = "";
+      if (filenameForAudioCheck) {
+          filenameForAudioCheck = filenameForAudioCheck.toLowerCase(); // Normalize for case-insensitive matching
+          if (ddp51Regex.test(filenameForAudioCheck)) {
+              warningText = "<strong>Audio Note:</strong> Dolby Digital Plus (DDP) audio might not be supported in this browser. Use 'Copy URL' or 'Open Externally' if you experience sound issues.";
+          } else if (advancedAudioRegex.test(filenameForAudioCheck)) {
+              warningText = "<strong>Audio Note:</strong> DTS/Atmos/TrueHD audio is likely unsupported in this browser. Use 'Copy URL' or 'Open Externally' for playback with compatible players.";
+          } else if (multiAudioHintRegex.test(filenameForAudioCheck)) {
+              warningText = "<strong>Audio Note:</strong> This file may contain multiple audio tracks. Use the audio track selector below (if available after loading) or an external player.";
+          }
+      }
+      // Display warning if applicable
+      if (warningText && audioWarningDiv) {
+          audioWarningDiv.innerHTML = warningText;
+          audioWarningDiv.style.display = 'block';
+      }
+
+     // --- Setup and Play Video ---
+     if (videoTitle) videoTitle.innerText = title; // Set the player title
+     if (vlcText) vlcText.innerText = url; // Update URL in the copy box
+     if (vlcBox) vlcBox.style.display = 'block'; // Show the copy box
+     videoElement.src = url; // Set the video source URL
+     videoElement.load(); // Load the video source
+
+     // Attempt to play (catch potential autoplay restrictions)
+     videoElement.play().catch(e => {
+          console.log("Autoplay prevented or failed:", e.message);
+          // Browser controls should allow the user to manually start playback.
+     });
+     videoContainer.style.display = 'flex'; // Make the video container visible (using flex display)
+
+     // Scroll the player container into view smoothly after a short delay
+     setTimeout(() => {
+         videoContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+     }, 150);
+ }
+
+/**
+ * Closes the inline video player, stops playback, resets its state, and moves it back to the main container.
+ */
+ function closePlayer() {
+    if (!videoContainer || !videoElement) return;
+
+    const wasPlaying = videoContainer.style.display !== 'none'; // Check if it was visible before closing
+
+    // Attempt to exit fullscreen if the player or its container is fullscreen
+    try {
+        const fsElement = document.fullscreenElement || document.webkitFullscreenElement;
+        if (fsElement && (fsElement === videoElement || fsElement === videoContainer)) {
+            if (document.exitFullscreen) document.exitFullscreen();
+            else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+            // The 'fullscreenchange' event listener will handle class toggling
+        }
+    } catch(err) { console.error("Error exiting fullscreen:", err); }
+
+    // Stop video playback and clear the source
+    videoElement.pause();
+    videoElement.removeAttribute('src');
+    videoElement.load(); // Important to clear buffer and stop network requests
+
+    // Hide the player container and reset related UI elements
+    videoContainer.style.display = 'none';
+    if (vlcBox) vlcBox.style.display = 'none';
+    if (audioWarningDiv) { audioWarningDiv.style.display = 'none'; audioWarningDiv.innerHTML = ''; }
+    if (audioTrackSelect) { audioTrackSelect.innerHTML = ''; audioTrackSelect.style.display = 'none'; }
+    if (copyFeedbackSpan) copyFeedbackSpan.classList.remove('show');
+    if (videoTitle) videoTitle.innerText = '';
+
+    // Move the player container back to the main #cinemaghar-container for structural cleanliness
+    // This prevents it from being orphaned if the action row is removed from the DOM later.
+     if (container && videoContainer.parentElement !== container) {
+        // Only move back if the main container still exists in the DOM
+        if (document.body.contains(container)) {
+             container.appendChild(videoContainer);
+        } else {
+             console.warn("Main container #cinemaghar-container not found in DOM, cannot move player back.");
+        }
+     }
+
+    // If the player was closed while its corresponding action row was still marked as active and visible,
+    // reset the 'View/Hide' button for that row.
+     if (wasPlaying && activeActionRow && activeActionRow.style.display !== 'none') { // Check if row is still 'active' and visible
+         const actionCell = activeActionRow.querySelector('td');
+         // Check if the player was *actually inside* this specific action row's cell when closed
+         // (This check might be redundant if closePlayer is always called correctly, but adds safety)
+         if (actionCell && videoContainer.parentElement === actionCell) {
+              // Reset the button text/state for the corresponding main row
+              const viewButton = activeActionRow.previousElementSibling?.querySelector('.view-button');
+              if (viewButton && viewButton.textContent === 'Hide') { // Only reset if it says 'Hide'
+                  viewButton.textContent = 'View';
+                  viewButton.setAttribute('aria-expanded', 'false');
+              }
+         }
+     }
+
+     // Ensure fullscreen class is removed if manually closed while fullscreen was active
+     // (Safety net, as the event listener should handle this)
+     if (videoContainer.classList.contains('is-fullscreen')) {
+        videoContainer.classList.remove('is-fullscreen');
+     }
+ }
+
+/**
+ * Utility to close the player only if it's currently visible ('flex' display).
+ */
+function closePlayerIfNeeded() {
+    if (videoContainer?.style.display === 'flex') { // Check specifically for 'flex'
+         closePlayer();
+    }
+}
+
+// --- Player Control Functions ---
+function seekVideo(seconds) { if (videoElement) videoElement.currentTime += seconds; }
+function toggleMute() { if (videoElement) videoElement.muted = !videoElement.muted; }
+function updateMuteButton() {
+    if (!videoElement || !muteButton) return;
+    const isMuted = videoElement.muted || videoElement.volume === 0;
+    muteButton.textContent = isMuted ? "Unmute" : "Mute";
+    muteButton.setAttribute('aria-pressed', String(isMuted));
+    if (volumeSlider) {
+        volumeSlider.style.opacity = isMuted ? '0.5' : '1'; // Dim slider when muted
+        volumeSlider.disabled = isMuted; // Disable slider when muted
+        // If unmuting via button and volume was 0, set a sensible default volume
+        if (!isMuted && videoElement.volume === 0) {
+             const defaultUnmuteVolume = 0.5; // Set volume to 50% when unmuting from 0
+             videoElement.volume = defaultUnmuteVolume;
+             volumeSlider.value = defaultUnmuteVolume; // Update slider visually
+        }
+    }
+}
+function setVolume(value) {
+    if (videoElement) {
+        const newVolume = parseFloat(value);
+        videoElement.volume = newVolume;
+        videoElement.muted = (newVolume === 0); // Automatically mute if slider goes to 0
+        // The 'volumechange' event listener will call updateMuteButton
+    }
+}
+function setPlaybackSpeed(value) { if (videoElement) videoElement.playbackRate = parseFloat(value); }
+function toggleFullscreen() {
+    const elementToMakeFullscreen = videoContainer; // Target the container for fullscreen
+    if (!elementToMakeFullscreen) return;
+    const fsElement = document.fullscreenElement || document.webkitFullscreenElement; // Check current fullscreen element
+
+    try {
+        if (!fsElement) { // If not currently fullscreen, request it
+            if (elementToMakeFullscreen.requestFullscreen) elementToMakeFullscreen.requestFullscreen();
+            else if (elementToMakeFullscreen.webkitRequestFullscreen) elementToMakeFullscreen.webkitRequestFullscreen(); // Safari prefix
+        } else { // If currently fullscreen, exit it
+            if (document.exitFullscreen) document.exitFullscreen();
+            else if (document.webkitExitFullscreen) document.webkitExitFullscreen(); // Safari prefix
+        }
+    } catch (err) {
+        console.error("Fullscreen API error:", err);
+        alert("Could not enter/exit fullscreen mode. Your browser might not support it or the request was denied.");
+    }
+}
+
+// --- Fullscreen Change Handler ---
+// This function is called automatically by the browser when fullscreen state changes.
+function handleFullscreenChange() {
+    // Check if *any* element is fullscreen, or specifically if our container/video is
+    const isFullscreen = !!(document.fullscreenElement || document.webkitFullscreenElement);
+    if (!videoContainer) return;
+    // Toggle a class on the video container based on the fullscreen state.
+    // CSS rules associated with '.is-fullscreen' will handle hiding/showing controls.
+    videoContainer.classList.toggle('is-fullscreen', isFullscreen);
+    console.log("Fullscreen state changed. Is fullscreen:", isFullscreen);
+}
+
+ // --- Event Listeners for Player State ---
+ if(videoElement) {
+     // Update volume slider and save volume when changed internally or externally
+     videoElement.addEventListener('volumechange', () => {
+         if (volumeSlider && parseFloat(volumeSlider.value) !== videoElement.volume) {
+              volumeSlider.value = videoElement.volume; // Sync slider if volume changed programmatically
+         }
+         updateMuteButton(); // Update mute button state
+         try { localStorage.setItem(config.PLAYER_VOLUME_KEY, String(videoElement.volume)); } // Save volume
+         catch (e) { console.warn("Could not save volume to localStorage", e); }
+     });
+     // Save playback speed when changed
+     videoElement.addEventListener('ratechange', () => {
+        if(playbackSpeedSelect) playbackSpeedSelect.value = String(videoElement.playbackRate); // Sync dropdown
+         try { localStorage.setItem(config.PLAYER_SPEED_KEY, String(videoElement.playbackRate)); } // Save speed
+         catch (e) { console.warn("Could not save playback speed to localStorage", e); }
+     });
+     // Populate audio tracks when video metadata is loaded
+     videoElement.addEventListener('loadedmetadata', populateAudioTrackSelector);
+ }
+ // Listen for browser fullscreen change events (standard and prefixed)
+ document.addEventListener('fullscreenchange', handleFullscreenChange);
+ document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+
+
+ // --- Audio Track Selection Logic ---
+ function populateAudioTrackSelector() {
+      // Ensure necessary elements and browser support exist
+      if (!videoElement || typeof videoElement.audioTracks === 'undefined' || !audioTrackSelect) {
+          if(audioTrackSelect) audioTrackSelect.style.display = 'none'; // Hide select if not applicable
+          return;
+      }
+      const tracks = videoElement.audioTracks;
+      audioTrackSelect.innerHTML = ''; // Clear previous options
+
+      // Hide the selector if there's only one audio track (or none)
+      if (tracks.length <= 1) {
+          audioTrackSelect.style.display = 'none';
+          return;
+      }
+
+      let hasEnabledTrack = false; // Check if any track is enabled by default
+      for (let i = 0; i < tracks.length; i++) { if (tracks[i].enabled) hasEnabledTrack = true; }
+
+      // If no track is enabled, attempt to enable the first one (browser default might vary)
+      if (!hasEnabledTrack && tracks.length > 0) {
+          try { tracks[0].enabled = true; } catch(e) { console.warn("Could not auto-enable first audio track:", e); }
+      }
+
+      // Create <option> elements for each audio track
+      for (let i = 0; i < tracks.length; i++) {
+          const track = tracks[i];
+          const option = document.createElement('option');
+          option.value = track.id || i; // Use track ID if available, otherwise index as value
+          // Create a user-friendly label
+          let label = track.label || `Track ${i + 1}`; // Use track label or generate default
+          if (track.language) { // Add language information if available
+              try {
+                  // Attempt to get the full language name (e.g., "English" from "en")
+                  const langName = new Intl.DisplayNames(['en'], { type: 'language' }).of(track.language.split('-')[0]);
+                  label += ` (${langName || track.language})`; // Use name or fallback to code
+              } catch (e) { label += ` (${track.language})`; } // Fallback for older browsers
+          }
+          option.textContent = label;
+          option.selected = track.enabled; // Mark the currently selected/enabled track
+          // Disable option if track failed to load (readyState isn't always reliable)
+          option.disabled = track.readyState === 'ended';
+          audioTrackSelect.appendChild(option);
+      }
+      audioTrackSelect.style.display = 'inline-block'; // Show the populated dropdown
+
+       // Listen for changes in the AudioTrackList (e.g., if tracks load later)
+       // Note: Support for this specific event listener might vary across browsers.
+       try { tracks.addEventListener('change', populateAudioTrackSelector); }
+       catch(e) { console.warn("Browser might not support 'change' listener on AudioTrackList", e)}
+  }
+
+ function changeAudioTrack(selectElement) {
+      if (!videoElement || !videoElement.audioTracks) return;
+      const selectedTrackValue = selectElement.value; // Value from the <option> (ID or index)
+      const tracks = videoElement.audioTracks;
+      let trackChanged = false;
+      // Iterate through all tracks: enable the selected one, disable others.
+      for (let i = 0; i < tracks.length; i++) {
+           const track = tracks[i];
+           // Determine if this track is the one selected in the dropdown
+           const isSelectedTrack = (track.id && track.id === selectedTrackValue) || String(i) === selectedTrackValue;
+           // Only change the 'enabled' status if it's different from the desired state
+           if (track.enabled !== isSelectedTrack) {
+                try {
+                    track.enabled = isSelectedTrack; // Enable or disable the track
+                    if (isSelectedTrack) console.log("Enabled audio track:", track.label || track.id || i);
+                    trackChanged = true;
+                }
+                catch (e) { console.error("Error changing audio track state for track:", track.id || i, e); }
+           }
+      }
+      if (!trackChanged) console.warn("Selected audio track already active or no change applied.");
+  }
+
+
+// --- External Player / Copy Functionality ---
+
+/**
+ * Attempts to open the video URL using a generic Android VIEW Intent,
+ * prompting the user with the "Open with" chooser.
+ * @param {string} url - The video URL.
+ */
+function openWithIntent(url) {
+    if (!url) return;
+    const mime = getMimeTypeFromUrl(url); // Get the MIME type (e.g., video/mp4, video/x-matroska)
+    // Try to get a somewhat meaningful title for the player
+    const videoTitleEncoded = encodeURIComponent(videoTitle?.innerText || document.title || 'Video');
+
+    // Construct the GENERIC Intent URI:
+    // - action=android.intent.action.VIEW: Standard action to view data.
+    // - type=<mime>: Specifies the data type so Android knows which apps can handle it.
+    // - S.title=<title>: Passes the title as an extra String (optional, but nice).
+    // - NO 'package=' parameter: This is crucial for showing the chooser.
+    // - 'end': Standard intent URI terminator.
+    const genericIntentUri = `intent:${url}#Intent;type=${mime};action=android.intent.action.VIEW;S.title=${videoTitleEncoded};end`;
+
+    console.log("Attempting generic VIEW intent:", genericIntentUri);
+
+    // Directly navigate the main window to the intent URI.
+    // On Android, the system intercepts this navigation attempt and resolves the intent.
+    // If multiple apps can handle the action+type, the "Open with" chooser is displayed.
+    // If only one app can handle it, that app opens directly.
+    // If no app can handle it, Android typically shows a "No app found..." message.
+    window.location.href = genericIntentUri;
+}
+
+
+/**
+ * Copies the provided URL to the clipboard. Shows feedback on success/failure.
+ * Uses modern Clipboard API if available, otherwise falls back to older execCommand.
+ * @param {HTMLElement} buttonElement - The button that was clicked (to find the feedback span).
+ * @param {string} url - The URL to copy.
+ */
+function copyVLCLink(buttonElement, url) {
+    if (!url) return;
+    // Find the feedback span specific to the action row where the button was clicked
+    const currentActionRow = buttonElement.closest('.action-row');
+    const feedbackSpan = currentActionRow?.querySelector('.copy-feedback');
+
+    // Use modern Clipboard API if available (preferred, more secure)
+    if (navigator.clipboard && navigator.clipboard.writeText && window.isSecureContext) {
+        navigator.clipboard.writeText(url).then(() => {
+            if (feedbackSpan) showCopyFeedback(feedbackSpan); // Show feedback in the correct row
+        }).catch(err => {
+            console.error("Async clipboard write failed:", err);
+            alert("Could not copy URL automatically. Please copy manually.");
+            highlightVlcText(); // Highlight text for manual copy on failure
+        });
+    } else {
+        // Fallback for older browsers or non-secure contexts
+        console.warn("Using fallback clipboard method (navigator.clipboard unavailable or insecure context).");
+        fallbackCopyTextToClipboard(url, feedbackSpan);
+    }
+}
+
+/**
+ * Fallback method to copy text using document.execCommand('copy').
+ * @param {string} text - The text to copy.
+ * @param {HTMLElement|null} feedbackSpan - The feedback element to show success message.
+ */
+function fallbackCopyTextToClipboard(text, feedbackSpan) {
+    // Create a temporary textarea element
+    const textArea = document.createElement("textarea");
+    textArea.value = text; // Set its value to the text to copy
+
+    // Make the textarea invisible and offscreen
+    textArea.style.position = "fixed"; textArea.style.top = "-9999px"; textArea.style.left = "-9999px";
+    textArea.style.opacity = "0";
+    textArea.setAttribute("readonly", ""); // Prevent editing
+
+    document.body.appendChild(textArea); // Add to DOM
+    let successful = false;
+    try {
+        textArea.select(); // Select the text inside
+        textArea.setSelectionRange(0, textArea.value.length); // Ensure full selection on mobile
+        successful = document.execCommand('copy'); // Execute the copy command
+        if (successful && feedbackSpan) showCopyFeedback(feedbackSpan); // Show feedback on success
+        else if (!successful) throw new Error('document.execCommand("copy") returned false');
+    } catch (err) {
+        console.error('Fallback copy method failed:', err);
+        alert("Automatic copy failed. Please select and copy the URL manually from the box below.");
+        highlightVlcText(); // Highlight text for manual copy on failure
+    } finally {
+        document.body.removeChild(textArea); // Always remove the temporary textarea
+    }
+}
+
+/**
+ * Shows the copy feedback message for a short duration.
+ * @param {HTMLElement} spanElement - The feedback span element to show.
+ */
+function showCopyFeedback(spanElement) {
+    if (!spanElement) return;
+    clearTimeout(copyTimeout); // Clear any existing timer for this specific element
+    spanElement.classList.add('show'); // Add class to make it visible (CSS handles animation)
+    // Set a timer to remove the class after 2 seconds
+    copyTimeout = setTimeout(() => {
+        spanElement.classList.remove('show');
+    }, 2000);
+}
+
+/**
+ * Highlights the text within the VLC/External Player URL code block for easy manual copying.
+ */
+function highlightVlcText() {
+     // Check if the code element exists and its container is visible
+     if (vlcText && vlcBox?.style.display === 'block') {
+         try {
+             // Create a range and select the contents of the code element
+             const range = document.createRange(); range.selectNodeContents(vlcText);
+             const selection = window.getSelection(); // Get the current selection object
+             if (selection) {
+                 selection.removeAllRanges(); // Clear any previous selection
+                 selection.addRange(range); // Apply the new range
+             }
+         } catch (selectErr) {
+             console.warn("Could not highlight VLC text for manual copy:", selectErr);
+         }
+     }
+}
+
+
+// --- State Persistence ---
+function saveStateToLocalStorage() {
+    try {
+        const stateToSave = {
+            searchTerm: currentState.searchTerm,
+            qualityFilter: currentState.qualityFilter,
+            sortColumn: currentState.sortColumn,
+            sortDirection: currentState.sortDirection,
+            currentPage: currentState.currentPage
+        };
+        localStorage.setItem(config.LOCAL_STORAGE_KEY, JSON.stringify(stateToSave));
+    }
+    catch (e) { console.error("Failed to save state to localStorage:", e); }
+}
+
+function loadStateFromLocalStorage() {
+    try {
+        const savedState = localStorage.getItem(config.LOCAL_STORAGE_KEY);
+        if (savedState) {
+            const parsedState = JSON.parse(savedState);
+            // Restore state, providing defaults if properties are missing or invalid
+            currentState.searchTerm = typeof parsedState.searchTerm === 'string' ? parsedState.searchTerm : '';
+            currentState.qualityFilter = typeof parsedState.qualityFilter === 'string' ? parsedState.qualityFilter : '';
+            currentState.sortColumn = typeof parsedState.sortColumn === 'string' ? parsedState.sortColumn : 'lastUpdated';
+            currentState.sortDirection = (typeof parsedState.sortDirection === 'string' && ['asc', 'desc'].includes(parsedState.sortDirection)) ? parsedState.sortDirection : 'desc';
+            currentState.currentPage = (typeof parsedState.currentPage === 'number' && parsedState.currentPage > 0) ? Math.floor(parsedState.currentPage) : 1;
+
+            // Update UI elements to reflect loaded state
+            if(searchInput) searchInput.value = currentState.searchTerm;
+            // Note: Quality filter select value is set *after* data loads and populates the dropdown options.
+        }
+    } catch (e) {
+        console.error("Failed to load state from localStorage:", e);
+        localStorage.removeItem(config.LOCAL_STORAGE_KEY); // Clear potentially corrupted state
+    }
+}
+
+// --- Initial Data Loading and Setup ---
+async function loadInitialData() {
+    const loadingHTML = '<tr><td colspan="6" class="status-message">Loading... <div class="spinner" style="margin: 10px auto;"></div></td></tr>';
+    // Show loading indicators in both tables
+    if(updatesTableBody) updatesTableBody.innerHTML = loadingHTML;
+    if(movieTableBody) movieTableBody.innerHTML = loadingHTML;
+    if(paginationControlsContainer) paginationControlsContainer.style.display = 'none'; // Hide pagination
+
+    uniqueQualities.clear(); // Reset the set of unique qualities
+    loadStateFromLocalStorage(); // Load saved filters/sort/page *before* fetching data
+
+    try {
+        console.log("Fetching data from:", config.GSheetWebAppURL);
+        const response = await fetch(config.GSheetWebAppURL);
+        console.log("Fetch response status:", response.status);
+        if (!response.ok) { // Check for network errors (4xx, 5xx)
+             let errorText = response.statusText || `HTTP status ${response.status}`;
+             try { // Attempt to parse potential JSON error from the API
+                const errorData = await response.json();
+                if(errorData?.error) errorText = errorData.error;
+             } catch(e) { /* Ignore if response is not JSON */ }
+             throw new Error(`Network error: ${errorText}`);
+        }
+        const result = await response.json();
+
+        // Check for application-level errors returned by the Google Apps Script
+        if (result.error) throw new Error(`API Error: ${result.error}`);
+        // Ensure the data received is in the expected array format
+        if (!Array.isArray(result.data)) throw new Error("Invalid data format received from API (expected 'data' array).");
+
+        // Process the valid data
+        allMovieData = result.data
+                        .filter(movie => movie && (movie.id || movie.filename || movie.url)) // Basic sanity check
+                        .map(preprocessMovieData); // Apply preprocessing to each item
+
+        console.log(`Successfully processed ${allMovieData.length} movie items.`);
+
+        // Populate UI elements that depend on the loaded data
+        populateQualityFilter(); // Create quality dropdown options based on processed data
+
+        // Restore selected quality filter *after* options are populated
+        if(qualityFilterSelect && uniqueQualities.has(currentState.qualityFilter)) {
+             qualityFilterSelect.value = currentState.qualityFilter; // Set dropdown to saved value
+        } else {
+             // If saved quality no longer exists in the data, reset the filter
+             currentState.qualityFilter = '';
+             if (qualityFilterSelect) qualityFilterSelect.value = '';
+        }
+
+        // Apply initial filters/sort (which also renders tables and pagination)
+        applyUserActions();
+
+    } catch (error) {
+        console.error('FATAL: Failed to load or process initial data:', error);
+        // Display a user-friendly error message in the tables
+        displayLoadError(`Error loading movie data: ${error.message}. Please try refreshing the page.`);
+    }
+}
+
+/**
+ * Populates the quality filter dropdown with unique qualities found in the data, sorted logically.
+ */
+function populateQualityFilter() {
+    if (!qualityFilterSelect) return;
+    const currentSelectedValue = currentState.qualityFilter; // Store current selection
+    qualityFilterSelect.innerHTML = '<option value="">All Qualities</option>'; // Reset dropdown
+
+    // Sort qualities for better user experience (e.g., 4K > 1080p > Source > Other)
+    const sortedQualities = [...uniqueQualities].sort((a, b) => {
+        // Prioritize resolution, then source type, then alphabetically
+        const resRegex = /^(4K|\d{3,4})P$/i;
+        const sourceRegex = /^(WEBDL|WEBRip|BluRay|BDRip|BRRip|HDTV|HDRip|DVD|DVDScr|HDCAM|HC|TC|TS|CAM)$/i;
+
+        const getScore = (q) => {
+            q = String(q || '').toUpperCase(); // Handle potential null/undefined
+            if (q === '4K' || q === '2160P') return 10;
+            if (q === '1080P') return 9;
+            if (q === '720P') return 8;
+            if (q === '480P') return 7;
+            if (sourceRegex.test(q)) return 6;
+            // Give slightly lower score to tech terms if they end up here
+            if (['HDR', 'DOLBY VISION', 'DV', 'HEVC', 'X265'].includes(q)) return 5;
+            return 0; // Lowest score for others
+        };
+
+        const scoreA = getScore(a);
+        const scoreB = getScore(b);
+
+        if (scoreA !== scoreB) return scoreB - scoreA; // Sort by score descending
+
+        // If scores are equal, sort alphabetically (case-insensitive)
+        return String(a || '').localeCompare(String(b || ''), undefined, { sensitivity: 'base' });
+    });
+
+    // Add sorted qualities as <option> elements
+    sortedQualities.forEach(quality => {
+        if (quality) { // Ensure quality is not empty/null
+            const option = document.createElement('option');
+            option.value = quality; option.textContent = quality;
+            qualityFilterSelect.appendChild(option);
+        }
+    });
+
+    // Restore previous selection if it still exists in the populated list
+    if (currentSelectedValue && sortedQualities.includes(currentSelectedValue)) {
+         qualityFilterSelect.value = currentSelectedValue;
+    }
+    updateFilterIndicator(); // Visually mark if a filter is active
+}
+
+/**
+ * Displays a critical error message in the table bodies.
+ * @param {string} message - The error message to display.
+ */
+function displayLoadError(message) {
+    const errorMsgHTML = `<tr><td colspan="6" class="error-message">${sanitize(message)}</td></tr>`;
+    // Display error in both table bodies
+    if (updatesTableBody) updatesTableBody.innerHTML = errorMsgHTML;
+    if (movieTableBody) movieTableBody.innerHTML = errorMsgHTML;
+    // Hide pagination controls on load error
+    if (paginationControlsContainer) paginationControlsContainer.style.display = 'none';
+    // Ensure the "Updates" section header remains visible even on error
+    if (updatesSection) updatesSection.style.display = 'block';
+}
+
+// --- Trigger Search Function ---
+function triggerSearch() {
+    if (!searchInput) return;
+    currentState.searchTerm = searchInput.value; // Update state with current input value
+    currentState.currentPage = 1; // Reset to page 1 for new search results
+    closePlayerIfNeeded(); // Close player if open
+    applyUserActions(); // Apply the search filter and re-render
+}
+
+// --- Global Event Listeners Setup ---
+document.addEventListener('DOMContentLoaded', () => {
+    // Load initial data when the DOM is fully parsed
+    loadInitialData();
+
+    // --- Search Event Listeners ---
+    if (searchButton) searchButton.addEventListener('click', triggerSearch); // Search on button click
+    if (searchInput) {
+        // Search on pressing Enter key in the input field
+        searchInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                event.preventDefault(); // Prevent form submission if it were in a form
+                triggerSearch();
+            }
+        });
+        // Search when the input's clear button ('x') is clicked (for type="search")
+        searchInput.addEventListener('search', () => {
+             // Needs a slight delay as 'search' event fires before value is cleared
+            setTimeout(() => { if (searchInput.value === '') triggerSearch(); }, 0);
+        });
+         // Optional: Search immediately when input is cleared manually (if desired)
+         searchInput.addEventListener('input', () => {
+             if (searchInput.value === '' && currentState.searchTerm !== '') { // Trigger only if clearing a previous term
+                 triggerSearch();
+             }
+         });
+    }
+
+    // --- Filter Event Listener ---
+    if (qualityFilterSelect) {
+        qualityFilterSelect.addEventListener('change', () => {
+            currentState.qualityFilter = qualityFilterSelect.value; // Update state
+            currentState.currentPage = 1; // Reset to page 1
+            closePlayerIfNeeded(); // Close player
+            applyUserActions(); // Apply filter and re-render
+        });
+    }
+
+    // --- Sort Event Listener (using event delegation on the table head) ---
+    if (movieTableHead) {
+        movieTableHead.addEventListener('click', handleSort);
+    }
+});
+
+// ]]>
+</script>
+
+</body>
+</html>
